@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from "./dashboard.service";
+import { Observable } from "rxjs";
+import { IBoard } from "../../shared/models/board.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  isModalOpened = false;
+  boards$!: Observable<IBoard[]>;
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.boards$ = this.dashboardService.getAllBoards();
+  }
+
+  openModal() {
+    this.isModalOpened = true;
   }
 
 }

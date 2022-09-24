@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from "./features/dashboard/dashboard.module";
 import { BoardModule } from "./features/board/board.module";
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    BoardModule
+    BoardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
