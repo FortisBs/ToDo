@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.boards$ = this.dashboardService.getAllBoards();
+    this.boards$ = this.dashboardService.dashboardItems$;
   }
 
   openModal() {

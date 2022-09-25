@@ -5,11 +5,13 @@ import { ActionBarModule } from "../../shared/action-bar/action-bar.module";
 import { DashboardModalComponent } from './dashboard-modal/dashboard-modal.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { DashboardItemComponent } from './dashboard-item/dashboard-item.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    DashboardModalComponent
+    DashboardModalComponent,
+    DashboardItemComponent
   ],
   imports: [
     CommonModule,

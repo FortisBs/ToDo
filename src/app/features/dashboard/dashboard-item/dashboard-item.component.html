@@ -1,0 +1,18 @@
+<div class="board">
+  <h3>{{ board.name }}</h3>
+  <p>{{ board.description }}</p>
+  <p>{{ board.createdAt | date }}</p>
+
+  <div class="options-btn" (click)="toggleOptions()">
+    <span class="dots"></span>
+    <span class="dots"></span>
+    <span class="dots"></span>
+  </div>
+
+  <div class="options" *ngIf="optionsOpened">
+    <p>Edit</p>
+    <p (click)="delete()">Delete</p>
+  </div>
+</div>
+
+

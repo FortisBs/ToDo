@@ -4,7 +4,7 @@
 <div class="container">
   <div class="add-board" (click)="openModal()"></div>
 
-  <div class="board" *ngFor="let item of boards$ | async">
-    <h3>{{ item.name }}</h3>
-  </div>
+  <app-dashboard-item *ngFor="let board of boards$ | async"
+                      [item]="board">
+  </app-dashboard-item>
 </div>
