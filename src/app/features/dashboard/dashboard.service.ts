@@ -14,45 +14,50 @@ export class DashboardService {
     this.initBoards();
   }
 
-  createBoard(data: {name: string, description: string}) {
-    const newBoard: IBoard = {
-      name: data.name,
-      description: data.description,
-      id: this.boards.length,
-      createdAt: new Date()
-    }
-    this.boards.push(newBoard);
-
-    this.addBoard();
+  createBoard(newBoard: IBoard) {
+    this.http
+      .post<{name: string}>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', newBoard)
+      .subscribe((generatedId) => {
+        newBoard.id = generatedId.name;
+        this.boards.push(newBoard);
+        this.dashboardItems$.next(this.boards);
+        this.addId(newBoard);
+      });
   }
 
-  private addBoard() {
+  private addId(board: IBoard) {
     this.http
-      .put<IBoard[]>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', this.boards)
-      .subscribe((response) => {
-        this.dashboardItems$.next(response);
-      });
+      .patch(`https://todo-565c1-default-rtdb.firebaseio.com/boards/${board.id}.json`, board)
+      .subscribe();
   }
 
   private initBoards() {
     this.http
-      .get<IBoard[]>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json')
+      .get('https://todo-565c1-default-rtdb.firebaseio.com/boards.json')
       .subscribe((response) => {
-        if (response) {
-          this.boards = response.slice();
-          this.dashboardItems$.next(response);
-        }
+        this.boards = Object.values(response) as IBoard[];
+        this.dashboardItems$.next(this.boards);
       });
   }
 
-  deleteBoard(id: number) {
-    const index = this.boards.findIndex((board) => board.id === id);
-    this.boards.splice(index, 1);
-
+  updateBoard(board: IBoard, newName: string) {
+    const updatedBoard = { ...board, name: newName };
     this.http
-      .put<IBoard[]>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', this.boards)
-      .subscribe((response) => {
-        this.dashboardItems$.next(response);
+      .patch(`https://todo-565c1-default-rtdb.firebaseio.com/boards/${board.id}.json`, updatedBoard)
+      .subscribe(() => {
+        const index = this.boards.findIndex((board) => board.id === updatedBoard.id);
+        this.boards[index] = updatedBoard;
+        this.dashboardItems$.next(this.boards);
+      });
+  }
+
+  deleteBoard(id: string) {
+    this.http
+      .delete(`https://todo-565c1-default-rtdb.firebaseio.com/boards/${id}.json`)
+      .subscribe(() => {
+        const index = this.boards.findIndex((board) => board.id === id);
+        this.boards.splice(index, 1);
+        this.dashboardItems$.next(this.boards);
       });
   }
 }

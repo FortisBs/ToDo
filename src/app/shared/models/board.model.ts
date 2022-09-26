@@ -1,5 +1,5 @@
 export interface IBoard {
-  id: number,
+  id?: string,
   name: string,
   description: string,
   createdAt: Date
@@ -7,7 +7,6 @@ export interface IBoard {
 
 export class Board implements IBoard {
   constructor(
-    public id: number,
     public name: string,
     public description: string,
     public createdAt: Date

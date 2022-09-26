@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  position: fixed;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.buttons {
+  align-self: end;
+}
+
+input {
+  height: 30px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid silver;
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+  }
+}
+
+#name {
+  font-size: 16px;
+  font-weight: bold;
+
+  &::placeholder {
+    font-size: 13px;
+    font-weight: normal;
+  }
+}
+
+.description-hint {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+button {
+  height: 30px;
+  width: 100px;
+  border: 1px solid silver;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin-right: 30px;
+  }
+
+  &:hover {
+    border: none;
+    outline: 2px solid black;
+  }
+
+  &:disabled {
+    border: 1px solid silver;
+    outline: none;
+  }
+}

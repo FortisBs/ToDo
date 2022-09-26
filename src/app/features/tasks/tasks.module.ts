@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoardComponent } from './board.component';
+import { TasksComponent } from './tasks.component';
 import { ActionBarModule } from "../../shared/action-bar/action-bar.module";
 
 @NgModule({
   declarations: [
-    BoardComponent
+    TasksComponent
   ],
   imports: [
     CommonModule,
     ActionBarModule
   ]
 })
-export class BoardModule { }
+export class TasksModule { }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardModalComponent } from './dashboard-modal.component';
+import { AddBoardComponent } from './add-board.component';
 
 describe('DashboardModalComponent', () => {
-  let component: DashboardModalComponent;
-  let fixture: ComponentFixture<DashboardModalComponent>;
+  let component: AddBoardComponent;
+  let fixture: ComponentFixture<AddBoardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardModalComponent ]
+      declarations: [ AddBoardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardModalComponent);
+    fixture = TestBed.createComponent(AddBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

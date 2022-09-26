@@ -19,13 +19,13 @@
   transform: translate(-50%, -50%);
   padding: 30px;
   background-color: white;
-}
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  margin-top: 30px;
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+  }
 }
 
 .buttons {
@@ -49,11 +49,16 @@ input {
 #name {
   font-size: 16px;
   font-weight: bold;
+
+  &::placeholder {
+    font-size: 13px;
+    font-weight: normal;
+  }
 }
 
-.description-hint {
-  font-size: 12px;
-  margin-top: 5px;
+.description {
+  margin-top: 10px;
+  font-style: italic;
 }
 
 button {

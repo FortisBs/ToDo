@@ -3,13 +3,14 @@ import { IBoard } from "../../../shared/models/board.model";
 import { DashboardService } from "../dashboard.service";
 
 @Component({
-  selector: 'app-dashboard-item',
-  templateUrl: './dashboard-item.component.html',
-  styleUrls: ['./dashboard-item.component.scss']
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss']
 })
-export class DashboardItemComponent {
+export class BoardComponent {
   @Input('item') board!: IBoard;
   optionsOpened = false;
+  editOpened = false;
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -17,7 +18,14 @@ export class DashboardItemComponent {
     this.optionsOpened = !this.optionsOpened;
   }
 
+  openEdit() {
+    this.editOpened = true;
+    this.optionsOpened = false;
+  }
+
   delete() {
-    this.dashboardService.deleteBoard(this.board.id);
+    if (this.board.id) {
+      this.dashboardService.deleteBoard(this.board.id);
+    }
   }
 }
