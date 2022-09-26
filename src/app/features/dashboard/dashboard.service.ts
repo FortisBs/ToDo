@@ -8,7 +8,7 @@ import { Subject } from "rxjs";
 })
 export class DashboardService {
   readonly dashboardItems$ = new Subject<IBoard[]>();
-  private boards!: IBoard[];
+  private boards: IBoard[] = [];
 
   constructor(private http: HttpClient) {
     this.initBoards();
@@ -38,13 +38,16 @@ export class DashboardService {
     this.http
       .get<IBoard[]>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json')
       .subscribe((response) => {
-        this.boards = response.slice();
-        this.dashboardItems$.next(response);
+        if (response) {
+          this.boards = response.slice();
+          this.dashboardItems$.next(response);
+        }
       });
   }
 
   deleteBoard(id: number) {
-    this.boards.splice(id, 1);
+    const index = this.boards.findIndex((board) => board.id === id);
+    this.boards.splice(index, 1);
 
     this.http
       .put<IBoard[]>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', this.boards)

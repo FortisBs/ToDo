@@ -17,5 +17,6 @@ export class DashboardModalComponent {
 
   onSubmit(formData: {name: string, description: string}) {
     this.dashboardService.createBoard(formData);
+    this.closeModal();
   }
 }
