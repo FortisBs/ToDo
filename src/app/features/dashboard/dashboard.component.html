@@ -1,7 +1,7 @@
-<app-action-bar title="Dashboard"></app-action-bar>
+<app-action-bar title="Dashboard" (searchValue)="searchValue = $event" (sortValue)="sortValue = $event"></app-action-bar>
 <app-add-board *ngIf="isModalOpened" (modalClosed)="isModalOpened = $event"></app-add-board>
 
 <div class="container">
   <div class="add-board" (click)="openModal()"></div>
-  <app-board *ngFor="let board of boards$ | async" [item]="board"></app-board>
+  <app-board *ngFor="let board of boards$ | async | filter: searchValue | sort: sortValue" [item]="board"></app-board>
 </div>

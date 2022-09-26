@@ -9,18 +9,27 @@
   display: flex;
   align-items: center;
   gap: 30px;
+}
 
-  &-btn {
-    width: 200px;
-    padding: 5px 0;
-    font-size: 16px;
-    background-color: silver;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+.filter {
+  height: 30px;
+  width: 200px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid silver;
+  font-size: 16px;
 
-    &:hover {
-      outline: 2px solid black;
-    }
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid black;
   }
+}
+
+#sort {
+  margin-left: 10px;
+  height: 30px;
+  width: 100px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid silver;
 }

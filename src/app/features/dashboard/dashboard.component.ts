@@ -11,6 +11,8 @@ import { IBoard } from "../../shared/models/board.model";
 export class DashboardComponent implements OnInit {
   isModalOpened = false;
   boards$!: Observable<IBoard[]>;
+  searchValue!: string;
+  sortValue!: 'createdAt' | 'name';
 
   constructor(private dashboardService: DashboardService) {}
 

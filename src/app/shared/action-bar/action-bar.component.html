@@ -2,7 +2,15 @@
   <h2>{{ title }}</h2>
 
   <div class="actions">
-    <button class="actions-btn">Filter</button>
-    <button class="actions-btn">Sort</button>
+    <div>
+      <label for="sort">Sort:</label>
+      <select id="sort" #selectInput (change)="sort()">
+        <option value="createdAt">by Date</option>
+        <option value="name">by Name</option>
+      </select>
+    </div>
+
+    <input type="text" class="filter" placeholder="Filter by name..."
+           #input (input)="filter(input.value)">
   </div>
 </div>
