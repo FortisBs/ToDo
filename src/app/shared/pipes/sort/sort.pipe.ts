@@ -5,12 +5,19 @@ import { IBoard } from "../../models/board.model";
   name: 'sort'
 })
 export class SortPipe implements PipeTransform {
-  transform(initialArray: IBoard[] | null, sortValue: 'createdAt' | 'name'): IBoard[] | null {
+  transform(initialArray: IBoard[] | null, sortValue: 'createdAt' | 'name', isAscDirection: boolean): IBoard[] | null {
+    console.log(initialArray)
     if (!initialArray) return null;
 
     const compare = (a: IBoard, b: IBoard) => {
-      if (a[sortValue] > b[sortValue]) return 1;
-      if (a[sortValue] < b[sortValue]) return -1;
+      if (isAscDirection) {
+        if (a[sortValue] > b[sortValue]) return 1;
+        if (a[sortValue] < b[sortValue]) return -1;
+        return 0;
+      }
+
+      if (a[sortValue] > b[sortValue]) return -1;
+      if (a[sortValue] < b[sortValue]) return 1;
       return 0;
     }
 

@@ -6,18 +6,22 @@ import { IBoard } from "../../shared/models/board.model";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  boards!: IBoard[];
   isModalOpened = false;
-  boards$!: Observable<IBoard[]>;
   searchValue!: string;
-  sortValue!: 'createdAt' | 'name';
+  sortValue: 'createdAt' | 'name' = 'createdAt';
+  isAsc = false;
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.boards$ = this.dashboardService.dashboardItems$;
+    this.dashboardService.initBoards();
+    this.dashboardService.dashboardItems$.subscribe((updatedBoards) => {
+      this.boards = updatedBoards;
+    });
   }
 
   openModal() {

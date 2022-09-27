@@ -1,0 +1,25 @@
+.container {
+  width: 300px;
+}
+
+.title {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tasks {
+  background-color: silver;
+  padding: 30px;
+
+  &-item {
+    margin-bottom: 30px;
+    height: 100px;
+    background-color: #656565;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+

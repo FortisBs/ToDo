@@ -9,7 +9,9 @@ export class ActionBarComponent {
   @Input() title!: string;
   @Output() searchValue = new EventEmitter<string>();
   @Output() sortValue = new EventEmitter<'createdAt' | 'name'>();
+  @Output() ascDirection = new EventEmitter<boolean>();
   @ViewChild('selectInput', {static: false}) selectInput!: ElementRef;
+  isAscDirection = false;
 
   filter(value: string) {
     this.searchValue.emit(value);
@@ -17,5 +19,10 @@ export class ActionBarComponent {
 
   sort() {
     this.sortValue.emit(this.selectInput.nativeElement.value);
+  }
+
+  toggleSortDirection() {
+    this.isAscDirection = !this.isAscDirection;
+    this.ascDirection.emit(this.isAscDirection);
   }
 }

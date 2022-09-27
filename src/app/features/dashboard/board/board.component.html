@@ -1,18 +1,18 @@
 <app-edit-board *ngIf="editOpened" [item]="board" (modalClosed)="editOpened = $event"></app-edit-board>
 
-<div class="board">
+<div class="board" (click)="openBoard()">
   <h3>{{ board.name }}</h3>
   <p>{{ board.description }}</p>
-  <p>{{ board.createdAt | date }}</p>
+  <p>{{ board.createdAt | date: 'short' }}</p>
 
-  <div class="options-btn" (click)="toggleOptions()">
+  <div class="options-btn" (click)="toggleOptions($event)">
     <span class="dots"></span>
     <span class="dots"></span>
     <span class="dots"></span>
   </div>
 
   <div class="options" *ngIf="optionsOpened">
-    <p (click)="openEdit()">Edit</p>
-    <p (click)="delete()">Delete</p>
+    <p (click)="openEdit($event)">Edit</p>
+    <p (click)="delete($event)">Delete</p>
   </div>
 </div>

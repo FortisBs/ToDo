@@ -10,6 +10,18 @@
       </select>
     </div>
 
+    <div class="sort-direction" *ngIf="isAscDirection; else desc" (click)="toggleSortDirection()">
+      <span>Asc</span>
+      <span class="sort-arrow">&#8593;</span>
+    </div>
+
+    <ng-template #desc>
+      <div class="sort-direction" (click)="toggleSortDirection()">
+        <span>Desc</span>
+        <span class="sort-arrow">&#8595;</span>
+      </div>
+    </ng-template>
+
     <input type="text" class="filter" placeholder="Filter by name..."
            #input (input)="filter(input.value)">
   </div>

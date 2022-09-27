@@ -1,1 +1,7 @@
-<app-action-bar title="Board name"></app-action-bar>
+<app-action-bar [title]="boardName"></app-action-bar>
+
+<div class="container">
+  <app-tasks-list *ngFor="let taskColumn of taskColumnsByStatus">
+    <h2>{{ taskColumn }}</h2>
+  </app-tasks-list>
+</div>

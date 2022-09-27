@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TasksService } from "./tasks.service";
 
 @Component({
   selector: 'app-tasks',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+  boardName!: string;
+  taskColumnsByStatus = ['To do', 'In Progress', 'Done'];
 
-  constructor() { }
+  constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
+    this.boardName = this.tasksService.activeBoard.name;
   }
 
 }

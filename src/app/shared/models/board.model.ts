@@ -2,13 +2,13 @@ export interface IBoard {
   id?: string,
   name: string,
   description: string,
-  createdAt: Date
+  createdAt: string
 }
 
 export class Board implements IBoard {
   constructor(
     public name: string,
     public description: string,
-    public createdAt: Date
+    public createdAt: string
   ) {}
 }

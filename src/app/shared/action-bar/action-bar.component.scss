@@ -33,3 +33,16 @@
   border: none;
   border-bottom: 1px solid silver;
 }
+
+.sort-direction {
+  border-bottom: 1px solid silver;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.sort-arrow {
+  font-size: 18px;
+  margin-left: 10px;
+}

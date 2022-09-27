@@ -10,16 +10,14 @@ export class DashboardService {
   readonly dashboardItems$ = new Subject<IBoard[]>();
   private boards: IBoard[] = [];
 
-  constructor(private http: HttpClient) {
-    this.initBoards();
-  }
+  constructor(private http: HttpClient) {}
 
   createBoard(newBoard: IBoard) {
     this.http
       .post<{name: string}>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', newBoard)
       .subscribe((generatedId) => {
         newBoard.id = generatedId.name;
-        this.boards.push(newBoard);
+        this.boards.unshift(newBoard);
         this.dashboardItems$.next(this.boards);
         this.addId(newBoard);
       });
@@ -31,7 +29,7 @@ export class DashboardService {
       .subscribe();
   }
 
-  private initBoards() {
+  initBoards() {
     this.http
       .get('https://todo-565c1-default-rtdb.firebaseio.com/boards.json')
       .subscribe((response) => {
@@ -60,4 +58,5 @@ export class DashboardService {
         this.dashboardItems$.next(this.boards);
       });
   }
+
 }

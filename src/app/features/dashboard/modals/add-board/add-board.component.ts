@@ -17,7 +17,7 @@ export class AddBoardComponent {
   }
 
   onSubmit(formData: {name: string, description: string}) {
-    const newBoard: IBoard = new Board(formData.name, formData.description, new Date());
+    const newBoard: IBoard = new Board(formData.name, formData.description, new Date().toString());
     this.dashboardService.createBoard(newBoard);
     this.closeModal();
   }
