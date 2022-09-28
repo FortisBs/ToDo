@@ -1,5 +1,15 @@
 <div class="container">
-  <h2>{{ title }}</h2>
+  <ng-container *ngIf="tasksPage; else dashboardPage">
+    <h2>
+      <a [routerLink]="['/dashboard']" class="bread-crumbs">Dashboard</a>
+      <span class="bread-crumbs-arrow"> ></span>
+      {{ title }}
+    </h2>
+  </ng-container>
+
+  <ng-template #dashboardPage>
+    <h2>{{ title }}</h2>
+  </ng-template>
 
   <div class="actions">
     <div>

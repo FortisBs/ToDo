@@ -16,7 +16,7 @@
   width: 200px;
   padding: 0 10px;
   border: none;
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid #D9D9D9;
   font-size: 16px;
 
   &:focus {
@@ -31,11 +31,11 @@
   width: 100px;
   font-size: 16px;
   border: none;
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid #D9D9D9;
 }
 
 .sort-direction {
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid #D9D9D9;
   height: 30px;
   line-height: 30px;
   padding: 0 5px;
@@ -45,4 +45,17 @@
 .sort-arrow {
   font-size: 18px;
   margin-left: 10px;
+}
+
+.bread-crumbs {
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.bread-crumbs-arrow {
+  font-weight: normal;
 }

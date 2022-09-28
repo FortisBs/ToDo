@@ -1,0 +1,12 @@
+.task {
+  padding: 15px;
+  background-color: #b9b0b0;
+
+  &:hover {
+    outline: 2px solid black;
+  }
+
+  &-name {
+    margin-bottom: 10px;
+  }
+}

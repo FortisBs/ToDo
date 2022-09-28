@@ -38,7 +38,7 @@ input {
   margin-top: 10px;
   padding: 0 10px;
   border: none;
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid #D9D9D9;
 
   &:focus {
     outline: none;
@@ -64,7 +64,7 @@ input {
 button {
   height: 30px;
   width: 100px;
-  border: 1px solid silver;
+  border: 1px solid #D9D9D9;
   cursor: pointer;
 
   &:first-of-type {
@@ -77,7 +77,8 @@ button {
   }
 
   &:disabled {
-    border: 1px solid silver;
+    border: 1px solid #D9D9D9;
     outline: none;
+    cursor: initial;
   }
 }
