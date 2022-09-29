@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from "./tasks.service";
 import { ITask, TaskStatus } from "../../shared/models/task.model";
+import { map, Observable } from "rxjs";
 
 @Component({
   selector: 'app-tasks',
@@ -9,21 +10,25 @@ import { ITask, TaskStatus } from "../../shared/models/task.model";
 })
 export class TasksComponent implements OnInit {
   boardName!: string;
-  taskColumnsByStatus: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
-  allTasks!: ITask[];
+  taskStatuses: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
+  tasksGroupedByStatus$!: Observable<ITask[][]>;
 
   constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.boardName = this.tasksService.activeBoard.name;
 
-    this.tasksService.getTasks().subscribe({
-      next: (data) => this.allTasks = data
-    });
+    this.tasksGroupedByStatus$ = this.tasksService.getTasks().pipe(
+      map((data) => this.filterReceivedData(data))
+    );
   }
 
-  filterTasksByStatus(status: TaskStatus) {
-    return this.allTasks.filter((task) => task.status === status);
+  private filterReceivedData(data: ITask[]) {
+    return this.taskStatuses.map((status) => {
+      return data.filter((task) => {
+        return task.boardId === this.tasksService.activeBoard.id && task.status === status;
+      });
+    });
   }
 
 }

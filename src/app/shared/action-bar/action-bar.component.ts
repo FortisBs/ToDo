@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { TasksService } from "../../features/tasks/tasks.service";
 
 @Component({
   selector: 'app-action-bar',
@@ -12,6 +13,8 @@ export class ActionBarComponent implements OnInit {
   @Output() ascDirection = new EventEmitter<boolean>();
   @ViewChild('selectInput', {static: false}) selectInput!: ElementRef;
 
+  constructor(private tasksService: TasksService) {}
+
   tasksPage!: boolean;
   isAscDirection = false;
 
@@ -21,6 +24,7 @@ export class ActionBarComponent implements OnInit {
 
   filter(value: string) {
     this.searchValue.emit(value);
+    this.tasksService.searchValue = value;
   }
 
   sort() {

@@ -7,23 +7,22 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BoardComponent } from './board/board.component';
 import { EditBoardComponent } from './modals/edit-board/edit-board.component';
-import { FilterPipe } from "../../shared/pipes/filter/filter.pipe";
 import { SortPipe } from "../../shared/pipes/sort/sort.pipe";
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    AddBoardComponent,
-    BoardComponent,
-    EditBoardComponent,
-    FilterPipe,
-    SortPipe
-  ],
-  imports: [
-    CommonModule,
-    ActionBarModule,
-    FormsModule,
-    HttpClientModule
-  ]
+    declarations: [
+      DashboardComponent,
+      AddBoardComponent,
+      BoardComponent,
+      EditBoardComponent,
+      SortPipe,
+
+    ],
+    imports: [
+        CommonModule,
+        ActionBarModule,
+        FormsModule,
+        HttpClientModule
+    ]
 })
 export class DashboardModule { }

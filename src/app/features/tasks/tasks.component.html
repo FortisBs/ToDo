@@ -1,8 +1,7 @@
 <app-action-bar [title]="boardName"></app-action-bar>
 
 <div class="container">
-  <app-tasks-list *ngFor="let taskColumnName of taskColumnsByStatus"
-                  [taskStatus]="taskColumnName"
-                  [tasks]="filterTasksByStatus(taskColumnName)">
+  <app-tasks-list *ngFor="let taskGroup of tasksGroupedByStatus$ | async; let i = index"
+                  [filteredTasks]="taskGroup" [taskStatus]="taskStatuses[i]">
   </app-tasks-list>
 </div>

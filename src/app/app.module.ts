@@ -16,7 +16,7 @@ import { HeaderComponent } from './core/header/header.component';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    TasksModule,
+    TasksModule
   ],
   providers: [],
   bootstrap: [AppComponent]

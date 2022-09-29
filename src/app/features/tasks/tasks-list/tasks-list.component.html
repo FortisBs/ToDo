@@ -1,12 +1,17 @@
+<app-add-task *ngIf="isModalOpened"
+              (newTaskData)="onAddTask($event)"
+              (modalClosed)="isModalOpened = $event">
+</app-add-task>
+
 <div class="container">
   <div class="title">
     <h2>{{ taskStatus }}</h2>
   </div>
 
   <div class="tasks">
-    <div class="tasks-add" (click)="onAddTask()">+</div>
+    <div class="tasks-add" (click)="openModal()">+</div>
 
-    <app-task *ngFor="let newTask of tasks"
+    <app-task *ngFor="let newTask of tasks | filter: searchValue"
               [task]="newTask">
     </app-task>
   </div>
