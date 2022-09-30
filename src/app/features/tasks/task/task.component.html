@@ -1,4 +1,21 @@
+<app-task-modal *ngIf="editOpened"
+                [item]="task" [editMode]="true"
+                (taskData)="onSaveChanges($event)"
+                (modalClosed)="editOpened = $event">
+</app-task-modal>
+
 <div class="task">
   <h3 class="task-name">{{ task.name }}</h3>
-  <p class="task-story-points">Story points: {{ task.storyPoints }}</p>
+  <p class="task-story-points">Complexity: {{ task.complexity }}</p>
+
+  <div class="options-btn" (click)="toggleOptions($event)">
+    <span class="dots"></span>
+    <span class="dots"></span>
+    <span class="dots"></span>
+  </div>
+
+  <div class="options" *ngIf="optionsOpened">
+    <p (click)="openEdit($event)">Edit</p>
+    <p (click)="delete($event)">Delete</p>
+  </div>
 </div>

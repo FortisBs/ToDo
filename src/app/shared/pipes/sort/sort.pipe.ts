@@ -6,7 +6,6 @@ import { IBoard } from "../../models/board.model";
 })
 export class SortPipe implements PipeTransform {
   transform(initialArray: IBoard[] | null, sortValue: 'createdAt' | 'name', isAscDirection: boolean): IBoard[] | null {
-    console.log(initialArray)
     if (!initialArray) return null;
 
     const compare = (a: IBoard, b: IBoard) => {

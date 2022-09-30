@@ -34,4 +34,12 @@ export class TasksService {
       .get('https://todo-565c1-default-rtdb.firebaseio.com/tasks.json')
       .pipe(map((data) => (data) ? Object.values(data) as ITask[] : []));
   }
+
+  deleteTask(id: string) {
+    return this.http.delete(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${id}.json`);
+  }
+
+  updateTask(task: ITask) {
+    return this.http.patch(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${task.id}.json`, task);
+  }
 }

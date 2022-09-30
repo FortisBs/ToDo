@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from "./dashboard.service";
-import { Observable } from "rxjs";
 import { IBoard } from "../../shared/models/board.model";
 
 @Component({

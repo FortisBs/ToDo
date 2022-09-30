@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
 import { ActionBarModule } from "../../shared/action-bar/action-bar.module";
-import { AddBoardComponent } from './modals/add-board/add-board.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+
+import { DashboardComponent } from './dashboard.component';
 import { BoardComponent } from './board/board.component';
-import { EditBoardComponent } from './modals/edit-board/edit-board.component';
+import { BoardModalComponent } from './board-modal/board-modal.component';
 import { SortPipe } from "../../shared/pipes/sort/sort.pipe";
+import { FilterPipe } from "../../shared/pipes/filter/filter.pipe";
 
 @NgModule({
-    declarations: [
-      DashboardComponent,
-      AddBoardComponent,
-      BoardComponent,
-      EditBoardComponent,
-      SortPipe,
-
-    ],
-    imports: [
-        CommonModule,
-        ActionBarModule,
-        FormsModule,
-        HttpClientModule
-    ]
+  declarations: [
+    DashboardComponent,
+    BoardComponent,
+    BoardModalComponent,
+    SortPipe,
+    FilterPipe,
+  ],
+  imports: [
+    CommonModule,
+    ActionBarModule,
+    FormsModule,
+    HttpClientModule
+  ]
 })
 export class DashboardModule { }

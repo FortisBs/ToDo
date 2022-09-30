@@ -1,4 +1,8 @@
-<app-edit-board *ngIf="editOpened" [item]="board" (modalClosed)="editOpened = $event"></app-edit-board>
+<app-board-modal *ngIf="editOpened"
+                 [item]="board"
+                 [editMode]="true"
+                 (modalClosed)="editOpened = $event">
+</app-board-modal>
 
 <div class="board" (click)="openBoard()">
   <h3>{{ board.name }}</h3>

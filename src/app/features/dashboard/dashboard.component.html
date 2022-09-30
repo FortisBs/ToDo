@@ -3,9 +3,9 @@
                 (sortValue)="sortValue = $event"
                 (ascDirection)="isAsc = $event">
 </app-action-bar>
-<app-add-board *ngIf="isModalOpened"
-               (modalClosed)="isModalOpened = $event">
-</app-add-board>
+<app-board-modal *ngIf="isModalOpened"
+                 (modalClosed)="isModalOpened = $event">
+</app-board-modal>
 
 <div class="container">
   <div class="add-board-wrapper">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-    <app-board *ngFor="let board of boards | sort: sortValue: isAsc"
-               [item]="board">
-    </app-board>
+  <app-board *ngFor="let board of boards | filter: searchValue | sort: sortValue: isAsc"
+             [item]="board">
+  </app-board>
 </div>

@@ -1,7 +1,7 @@
-<app-add-task *ngIf="isModalOpened"
-              (newTaskData)="onAddTask($event)"
-              (modalClosed)="isModalOpened = $event">
-</app-add-task>
+<app-task-modal *ngIf="isModalOpened"
+                (taskData)="onAddTask($event)"
+                (modalClosed)="isModalOpened = $event">
+</app-task-modal>
 
 <div class="container">
   <div class="title">
@@ -11,8 +11,9 @@
   <div class="tasks">
     <div class="tasks-add" (click)="openModal()">+</div>
 
-    <app-task *ngFor="let newTask of tasks | filter: searchValue"
-              [task]="newTask">
+    <app-task *ngFor="let newTask of tasks" [task]="newTask"
+              (updatedTask)="onUpdateTask($event)"
+              (deletedTaskId)="onDeleteTask($event)">
     </app-task>
   </div>
 </div>

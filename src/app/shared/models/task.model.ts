@@ -3,7 +3,7 @@ export type TaskStatus = 'To Do' | 'In Progress' | 'Done';
 export interface ITask {
   id?: string,
   name: string,
-  storyPoints: number,
+  complexity: number,
   status: TaskStatus,
   boardId: string
 }
@@ -11,8 +11,10 @@ export interface ITask {
 export class Task implements ITask {
   constructor(
     public name: string,
-    public storyPoints: number,
+    public complexity: number,
     public status: TaskStatus,
     public boardId: string
   ) {}
 }
+
+export type TaskFormData = { name: string, complexity: number };

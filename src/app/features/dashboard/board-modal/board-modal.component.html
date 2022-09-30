@@ -1,0 +1,31 @@
+<div class="backdrop" (click)="closeModal()"></div>
+
+<div class="modal">
+  <h3>{{ editMode ? 'Edit board' : 'Add new board' }}</h3>
+
+  <!-- Template driven form -->
+  <form (ngSubmit)="editMode ? onEdit(form.value) : onAdd(form.value)" #form=ngForm>
+    <div>
+      <label for="name">Board name:</label><br>
+      <input type="text" id="name" name="name" placeholder="Text here..."
+             [ngModel]="editMode ? board.name : ''" required>
+    </div>
+
+    <div *ngIf="!editMode; else descriptionReadOnly">
+      <label for="description">Board description:</label><br>
+      <input type="text" id="description" name="description" placeholder="Text here..." ngModel required>
+    </div>
+
+    <ng-template #descriptionReadOnly>
+      <div>
+        <p>Description:</p>
+        <p class="description">{{ board.description }}</p>
+      </div>
+    </ng-template>
+
+    <div class="buttons">
+      <button type="button" (click)="closeModal()">Cancel</button>
+      <button type="submit" [disabled]="form.invalid">{{ editMode ? 'Save' : 'Add' }}</button>
+    </div>
+  </form>
+</div>
