@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITask, TaskFormData } from "../../../shared/models/task.model";
+import { Component, Input } from '@angular/core';
+import { ITask } from "../../../shared/models/task.model";
 import { TasksService } from "../tasks.service";
 
 @Component({
@@ -9,8 +9,6 @@ import { TasksService } from "../tasks.service";
 })
 export class TaskComponent {
   @Input() task!: ITask;
-  @Output() deletedTaskId = new EventEmitter<string>();
-  @Output() updatedTask = new EventEmitter<ITask>();
 
   optionsOpened = false;
   editOpened = false;
@@ -30,18 +28,6 @@ export class TaskComponent {
 
   delete(event: MouseEvent) {
     event.stopPropagation();
-    if (this.task.id) {
-      this.tasksService.deleteTask(this.task.id).subscribe(() => {
-        this.deletedTaskId.emit(this.task.id);
-      });
-    }
+    this.tasksService.deleteTask(this.task);
   }
-
-  onSaveChanges(data: TaskFormData) {
-    const newTaskData: ITask = { ...this.task, name: data.name, complexity: data.complexity };
-    this.tasksService.updateTask(newTaskData).subscribe({
-      next: () => this.updatedTask.emit(newTaskData)
-    });
-  }
-
 }

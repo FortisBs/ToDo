@@ -1,8 +1,4 @@
-<app-action-bar [title]="'Dashboard'"
-                (searchValue)="searchValue = $event"
-                (sortValue)="sortValue = $event"
-                (ascDirection)="isAsc = $event">
-</app-action-bar>
+<app-toolbar [title]="'Dashboard'"></app-toolbar>
 <app-board-modal *ngIf="isModalOpened"
                  (modalClosed)="isModalOpened = $event">
 </app-board-modal>
@@ -15,7 +11,11 @@
     </div>
   </div>
 
-  <app-board *ngFor="let board of boards | filter: searchValue | sort: sortValue: isAsc"
-             [item]="board">
-  </app-board>
+  <ng-container *ngIf="boards$ | async as boards">
+    <app-board *ngFor="let board of boards
+               | filter: toolbarData.searchValue
+               | sort: toolbarData.sortValue: toolbarData.ascDirection"
+               [item]="board">
+    </app-board>
+  </ng-container>
 </div>

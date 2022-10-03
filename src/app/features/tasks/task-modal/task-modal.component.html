@@ -3,17 +3,17 @@
 <div class="modal">
   <h3>{{ editMode ? 'Edit task' : 'Add new task' }}</h3>
 
-  <form (ngSubmit)="onSubmit(form.value)" #form=ngForm>
+  <form (ngSubmit)="editMode ? saveChanges(form.value) : addTask(form.value)" #form=ngForm>
     <div>
       <label for="name">Task name:</label><br>
       <input type="text" id="name" name="name" placeholder="Text here..."
-             [ngModel]="editMode ? task.name : ''" required>
+             [ngModel]="editMode ? taskToBeEdited.name : ''" required>
     </div>
 
     <div>
       <label for="complexity">Complexity:</label><br>
       <input type="number" id="complexity" name="complexity"
-             [ngModel]="editMode ? task.complexity : 1" min="1" max="10" required>
+             [ngModel]="editMode ? taskToBeEdited.complexity : 1" min="1" max="10" required>
     </div>
 
     <div class="buttons">

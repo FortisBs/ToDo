@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
-import { ActionBarModule } from "../../shared/action-bar/action-bar.module";
+import { ToolbarModule } from "../../shared/toolbar/toolbar.module";
 import { FormsModule } from "@angular/forms";
 
 import { TasksComponent } from './tasks.component';
@@ -19,7 +19,7 @@ import { TaskModalComponent } from './task-modal/task-modal.component';
   imports: [
     CommonModule,
     HttpClientModule,
-    ActionBarModule,
+    ToolbarModule,
     FormsModule
   ]
 })

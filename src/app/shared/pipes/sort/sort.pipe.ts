@@ -1,14 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IBoard } from "../../models/board.model";
+import { SortValue } from "../../models/toolbar.model";
 
 @Pipe({
   name: 'sort'
 })
 export class SortPipe implements PipeTransform {
-  transform(initialArray: IBoard[] | null, sortValue: 'createdAt' | 'name', isAscDirection: boolean): IBoard[] | null {
-    if (!initialArray) return null;
+  transform<T>(
+    initialArray: T[],
+    sortValue: SortValue,
+    isAscDirection: boolean
+  ): T[] {
+    if (!initialArray.length) return [];
 
-    const compare = (a: IBoard, b: IBoard) => {
+    const compare = (a: any, b: any) => {
       if (isAscDirection) {
         if (a[sortValue] > b[sortValue]) return 1;
         if (a[sortValue] < b[sortValue]) return -1;

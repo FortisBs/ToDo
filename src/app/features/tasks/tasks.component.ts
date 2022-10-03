@@ -1,34 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TasksService } from "./tasks.service";
 import { ITask, TaskStatus } from "../../shared/models/task.model";
-import { map, Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { ToolbarData } from "../../shared/models/toolbar.model";
+import { ToolbarService } from "../../shared/toolbar/toolbar.service";
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, OnDestroy {
   boardName!: string;
-  taskStatuses: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
-  tasksGroupedByStatus$!: Observable<ITask[][]>;
+  taskLists$!: Observable<Map<TaskStatus, ITask[]>>;
+  toolbarData: ToolbarData = {
+    searchValue: '',
+    sortValue: 'createdAt',
+    ascDirection: false
+  };
+  private subscription!: Subscription;
 
-  constructor(private tasksService: TasksService) {}
+  constructor(
+    private tasksService: TasksService,
+    private toolbarService: ToolbarService
+  ) {}
 
   ngOnInit(): void {
     this.boardName = this.tasksService.activeBoard.name;
-
-    this.tasksGroupedByStatus$ = this.tasksService.getTasks().pipe(
-      map((data) => this.filterReceivedData(data))
-    );
-  }
-
-  private filterReceivedData(data: ITask[]) {
-    return this.taskStatuses.map((status) => {
-      return data.filter((task) => {
-        return task.boardId === this.tasksService.activeBoard.id && task.status === status;
-      });
+    this.taskLists$ = this.tasksService.tasksGroupedByStatus$;
+    this.tasksService.initTasks();
+    this.subscription = this.toolbarService.getData().subscribe({
+      next: (data) => this.toolbarData = data
     });
   }
 
+  disableSort() {
+    return 0;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

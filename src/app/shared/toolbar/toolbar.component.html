@@ -14,25 +14,27 @@
   <div class="actions">
     <div>
       <label for="sort">Sort:</label>
-      <select id="sort" #selectInput (change)="sort()">
-        <option value="createdAt">by Date</option>
+      <select id="sort" #selectInput (change)="changeSortValue()">
+        <option value="createdAt" selected>by Date</option>
         <option value="name">by Name</option>
+        <option *ngIf="tasksPage" value="complexity">by Complexity</option>
       </select>
     </div>
 
-    <div class="sort-direction" *ngIf="isAscDirection; else desc" (click)="toggleSortDirection()">
+    <div class="sort-direction" *ngIf="data.ascDirection; else desc"
+         (click)="changeSortDirection()">
       <span>Asc</span>
       <span class="sort-arrow">&#8593;</span>
     </div>
 
     <ng-template #desc>
-      <div class="sort-direction" (click)="toggleSortDirection()">
+      <div class="sort-direction" (click)="changeSortDirection()">
         <span>Desc</span>
         <span class="sort-arrow">&#8595;</span>
       </div>
     </ng-template>
 
     <input type="text" class="filter" placeholder="Filter by name..."
-           #input (input)="filter(input.value)">
+           #input (input)="changeSearchValue(input.value)">
   </div>
 </div>

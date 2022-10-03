@@ -20,7 +20,11 @@ export class BoardModalComponent {
   }
 
   onAdd(formData: {name: string, description: string}) {
-    const newBoard: IBoard = new Board(formData.name, formData.description, new Date().toString());
+    const newBoard: IBoard = new Board(
+      formData.name.trim(),
+      formData.description.trim(),
+      new Date().toString()
+    );
     this.dashboardService.createBoard(newBoard);
     this.closeModal();
   }

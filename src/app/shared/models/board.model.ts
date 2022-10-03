@@ -12,3 +12,4 @@ export class Board implements IBoard {
     public createdAt: string
   ) {}
 }
+

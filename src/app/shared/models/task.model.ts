@@ -1,11 +1,13 @@
 export type TaskStatus = 'To Do' | 'In Progress' | 'Done';
+export const taskStatuses: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
 
 export interface ITask {
   id?: string,
   name: string,
   complexity: number,
   status: TaskStatus,
-  boardId: string
+  boardId: string,
+  createdAt: string
 }
 
 export class Task implements ITask {
@@ -13,7 +15,8 @@ export class Task implements ITask {
     public name: string,
     public complexity: number,
     public status: TaskStatus,
-    public boardId: string
+    public boardId: string,
+    public createdAt: string
   ) {}
 }
 

@@ -10,6 +10,11 @@
   &-name {
     margin-bottom: 10px;
   }
+
+  &-data {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .options-btn {

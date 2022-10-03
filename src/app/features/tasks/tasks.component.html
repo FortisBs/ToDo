@@ -1,7 +1,12 @@
-<app-action-bar [title]="boardName"></app-action-bar>
+<app-toolbar [title]="boardName"></app-toolbar>
 
 <div class="container">
-  <app-tasks-list *ngFor="let taskGroup of tasksGroupedByStatus$ | async; let i = index"
-                  [filteredTasks]="taskGroup" [taskStatus]="taskStatuses[i]">
-  </app-tasks-list>
+  <ng-container *ngIf="taskLists$ | async as taskLists">
+    <app-tasks-list *ngFor="let taskGroup of taskLists | keyvalue: disableSort"
+                    [taskStatus]="taskGroup.key"
+                    [filteredTasks]="taskGroup.value
+                    | filter: toolbarData.searchValue
+                    | sort: toolbarData.sortValue: toolbarData.ascDirection">
+    </app-tasks-list>
+  </ng-container>
 </div>

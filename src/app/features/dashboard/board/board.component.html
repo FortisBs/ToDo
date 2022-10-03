@@ -7,7 +7,7 @@
 <div class="board" (click)="openBoard()">
   <h3>{{ board.name }}</h3>
   <p>{{ board.description }}</p>
-  <p>{{ board.createdAt | date: 'short' }}</p>
+  <p>{{ board.createdAt | date: 'MMMM d, y' }}</p>
 
   <div class="options-btn" (click)="toggleOptions($event)">
     <span class="dots"></span>
