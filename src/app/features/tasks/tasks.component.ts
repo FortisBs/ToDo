@@ -3,7 +3,7 @@ import { TasksService } from "./tasks.service";
 import { ITask, TaskStatus } from "../../shared/models/task.model";
 import { Observable, Subscription } from "rxjs";
 import { ToolbarData } from "../../shared/models/toolbar.model";
-import { ToolbarService } from "../../shared/toolbar/toolbar.service";
+import { ToolbarService } from "../../shared/components/toolbar/toolbar.service";
 
 @Component({
   selector: 'app-tasks',

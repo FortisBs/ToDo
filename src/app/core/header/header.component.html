@@ -1,8 +1,9 @@
 <header id="header">
   <h1>Task Manager</h1>
-  <div class="header-auth">
-    <a class="auth-link">Login</a>
-    <span>/</span>
-    <a class="auth-link">Register</a>
-  </div>
+  <nav class="nav">
+    <a class="nav-link" *ngIf="page !== 'home'" routerLink="/home">Home</a>
+    <a class="nav-link" *ngIf="page === 'home' && isAuthenticated" routerLink="/dashboard">Dashboard</a>
+    <a class="nav-link" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
+    <a class="nav-link" *ngIf="!isAuthenticated && page !== 'auth'" routerLink="/auth">Login</a>
+  </nav>
 </header>

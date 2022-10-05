@@ -5,13 +5,13 @@
   background-color: #D9D9D9;
 }
 
-.header-auth {
+.nav {
   display: flex;
-  gap: 10px;
+  gap: 30px;
   align-items: center;
   font-size: 20px;
 
-  .auth-link {
+  &-link {
     color: black;
     text-decoration: none;
     cursor: pointer;

@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ToolbarService } from "./toolbar.service";
-import { ToolbarData } from "../models/toolbar.model";
+import { ToolbarData } from "../../models/toolbar.model";
 
 @Component({
   selector: 'app-toolbar',

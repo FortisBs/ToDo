@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToolbarModule } from "../../shared/toolbar/toolbar.module";
+import { ToolbarModule } from "../../shared/components/toolbar/toolbar.module";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 

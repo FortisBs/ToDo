@@ -17,8 +17,8 @@ export class DashboardService {
       .post<{name: string}>('https://todo-565c1-default-rtdb.firebaseio.com/boards.json', newBoard)
       .subscribe((generatedId) => {
         newBoard.id = generatedId.name;
-        this.boards.unshift(newBoard);
-        this.dashboardItems$.next(this.boards);
+        this.boards.push(newBoard);
+        this.dashboardItems$.next(this.boards.slice());
         this.addId(newBoard);
       });
   }
@@ -45,7 +45,7 @@ export class DashboardService {
       .subscribe(() => {
         const index = this.boards.findIndex((board) => board.id === updatedBoard.id);
         this.boards[index] = updatedBoard;
-        this.dashboardItems$.next(this.boards);
+        this.dashboardItems$.next(this.boards.slice());
       });
   }
 
@@ -55,7 +55,7 @@ export class DashboardService {
       .subscribe(() => {
         const index = this.boards.findIndex((board) => board.id === id);
         this.boards.splice(index, 1);
-        this.dashboardItems$.next(this.boards);
+        this.dashboardItems$.next(this.boards.slice());
       });
   }
 

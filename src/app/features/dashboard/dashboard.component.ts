@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashboardService } from "./dashboard.service";
 import { IBoard } from "../../shared/models/board.model";
 import { Observable, Subscription } from "rxjs";
-import { ToolbarService } from "../../shared/toolbar/toolbar.service";
+import { ToolbarService } from "../../shared/components/toolbar/toolbar.service";
 import { ToolbarData } from "../../shared/models/toolbar.model";
+import { AuthService } from "../auth/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private toolbarService: ToolbarService
+    private toolbarService: ToolbarService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription = this.toolbarService.getData().subscribe({
       next: (data) => this.toolbarData = data
     });
+    this.authService.currentPage.next('dashboard');
   }
 
   openModal() {

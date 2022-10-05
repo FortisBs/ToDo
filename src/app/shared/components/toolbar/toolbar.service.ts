@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from "rxjs";
-import { ToolbarData } from "../models/toolbar.model";
+import { ToolbarData } from "../../models/toolbar.model";
 
 @Injectable({
   providedIn: 'root'

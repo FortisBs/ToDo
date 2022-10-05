@@ -1,0 +1,28 @@
+<div class="container">
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <h2 class="title">{{ isLoginMode ? 'Login' : 'Registration' }}</h2>
+
+  <form [formGroup]="authForm"
+        (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
+
+    <div>
+      <button [disabled]="authForm.invalid">
+        {{ isLoginMode ? 'Sign in' : 'Sign up' }}
+      </button>
+      <button type="button" (click)="switchMode()">
+        Switch to {{ isLoginMode ? 'Registration' : 'Login' }}
+      </button>
+    </div>
+
+  </form>
+</div>

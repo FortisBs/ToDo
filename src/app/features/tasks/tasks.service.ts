@@ -19,7 +19,9 @@ export class TasksService {
       .post<{name: string}>('https://todo-565c1-default-rtdb.firebaseio.com/tasks.json', task)
       .subscribe((generatedId) => {
         task.id = generatedId.name;
-        this.groupedTasks.get(task.status)?.unshift(task);
+        const tasks = this.groupedTasks.get(task.status) || [];
+        tasks.push(task);
+        this.groupedTasks.set(task.status, tasks.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
         this.addId(task);
       });
@@ -53,8 +55,10 @@ export class TasksService {
       .delete(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${taskToBeDeleted.id}.json`)
       .subscribe(() => {
         const tasks = this.groupedTasks.get(taskToBeDeleted.status);
-        const index = tasks!.findIndex((task) => task.id === taskToBeDeleted.id);
-        tasks!.splice(index, 1);
+        if (!tasks) return;
+        const index = tasks.findIndex((task) => task.id === taskToBeDeleted.id);
+        tasks.splice(index, 1);
+        this.groupedTasks.set(taskToBeDeleted.status, tasks.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
       });
   }
@@ -64,8 +68,10 @@ export class TasksService {
       .patch(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${updatedTask.id}.json`, updatedTask)
       .subscribe(() => {
         const tasks = this.groupedTasks.get(updatedTask.status);
-        const index = tasks!.findIndex((task) => task.id === updatedTask.id);
-        tasks![index] = updatedTask;
+        if (!tasks) return;
+        const index = tasks.findIndex((task) => task.id === updatedTask.id);
+        tasks[index] = updatedTask;
+        this.groupedTasks.set(updatedTask.status, tasks.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
       });
   }
