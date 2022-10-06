@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth', component: AuthComponent, canActivate: [LoginGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'board/:name', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard/:id', component: TasksComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
 

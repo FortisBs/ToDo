@@ -1,5 +1,6 @@
 export interface IBoard {
   id?: string,
+  uid?: string
   name: string,
   description: string,
   createdAt: string
@@ -12,4 +13,3 @@ export class Board implements IBoard {
     public createdAt: string
   ) {}
 }
-

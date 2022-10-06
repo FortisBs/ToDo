@@ -39,8 +39,6 @@ export class BoardComponent {
   }
 
   openBoard() {
-    this.tasksService.activeBoard = this.board;
-    const boardNameInUrl = this.board.name.replace(/\s+/g, '-');
-    this.router.navigate(['/board/' + boardNameInUrl]);
+    this.router.navigate(['/dashboard/' + this.board.id]);
   }
 }

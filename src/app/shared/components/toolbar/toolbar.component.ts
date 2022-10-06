@@ -1,6 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToolbarService } from "./toolbar.service";
 import { ToolbarData } from "../../models/toolbar.model";
+import { ActivatedRoute } from "@angular/router";
+import { DashboardService } from "../../../features/dashboard/dashboard.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -8,9 +10,9 @@ import { ToolbarData } from "../../models/toolbar.model";
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  @Input() title!: string;
   @ViewChild('selectInput', {static: false}) selectInput!: ElementRef;
 
+  boardName!: string;
   tasksPage!: boolean;
   data: ToolbarData = {
     searchValue: '',
@@ -18,10 +20,20 @@ export class ToolbarComponent implements OnInit {
     ascDirection: false
   }
 
-  constructor(private toolbarService: ToolbarService) {}
+  constructor(
+    private toolbarService: ToolbarService,
+    private dashboardService: DashboardService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.tasksPage = this.title !== 'Dashboard';
+    const boardId: string | undefined = this.route.snapshot.params['id'];
+    this.tasksPage = !!boardId;
+    if (boardId) {
+      this.dashboardService.getBoard(boardId).subscribe({
+        next: (board) => this.boardName = board.name
+      });
+    }
   }
 
   private captureChanges() {

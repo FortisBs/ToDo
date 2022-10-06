@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { IBoard } from "../../shared/models/board.model";
 import { ITask, TaskStatus, taskStatuses } from "../../shared/models/task.model";
 import { Subject } from "rxjs";
 
@@ -8,7 +7,6 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 export class TasksService {
-  activeBoard!: IBoard;
   tasksGroupedByStatus$ = new Subject<Map<TaskStatus, ITask[]>>();
   groupedTasks = new Map<TaskStatus, ITask[]>();
 
@@ -33,15 +31,15 @@ export class TasksService {
       .subscribe();
   }
 
-  initTasks() {
+  initTasks(id: string) {
     this.http
-      .get('https://todo-565c1-default-rtdb.firebaseio.com/tasks.json')
+      .get(`https://todo-565c1-default-rtdb.firebaseio.com/tasks.json?orderBy="boardId"&equalTo="${id}"`)
       .subscribe((response) => {
         const data: ITask[] = (response) ? Object.values(response) as ITask[] : [];
 
         taskStatuses.forEach((status) => {
           const tasksByStatus = data.filter((task) => {
-            return task.boardId === this.activeBoard.id && task.status === status;
+            return task.status === status;
           });
           this.groupedTasks.set(status, tasksByStatus);
         });

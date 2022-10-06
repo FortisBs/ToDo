@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { BehaviorSubject, catchError, Subject, tap, throwError } from "rxjs";
-import { AuthResponseData } from "../../shared/models/auth.model";
+import { AuthResponseData, LocalStorageUser } from "../../shared/models/auth.model";
 import { User } from "../../shared/models/user.model";
 import { Router } from "@angular/router";
-
-type LocalStorageUser = {
-  email: string,
-  id: string,
-  _token: string,
-  _tokenExpirationDate: string
-};
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +41,7 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/auth']);
     localStorage.removeItem('ToDoUser');
 
     if (this.tokenExpirationTimer) {

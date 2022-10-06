@@ -1,4 +1,4 @@
-export type TaskStatus = 'To Do' | 'In Progress' | 'Done';
+export type TaskStatus = 'To Do' | 'In Progress' | 'Done' | 'Archived';
 export const taskStatuses: TaskStatus[] = ['To Do', 'In Progress', 'Done'];
 
 export interface ITask {
