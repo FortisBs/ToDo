@@ -17,7 +17,8 @@
   </div>
 
   <div class="options" *ngIf="optionsOpened">
-    <p (click)="openEdit($event)">Edit</p>
+    <p *ngIf="task.status !== 'Archived'" (click)="openEdit($event)">Edit</p>
     <p (click)="delete($event)">Delete</p>
+    <p *ngIf="task.status === 'Done'" (click)="moveToArchive()">Archive</p>
   </div>
 </div>

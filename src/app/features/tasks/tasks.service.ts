@@ -19,6 +19,7 @@ export class TasksService {
         task.id = generatedId.name;
         const tasks = this.groupedTasks.get(task.status) || [];
         tasks.push(task);
+
         this.groupedTasks.set(task.status, tasks.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
         this.addId(task);
@@ -52,10 +53,10 @@ export class TasksService {
     this.http
       .delete(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${taskToBeDeleted.id}.json`)
       .subscribe(() => {
-        const tasks = this.groupedTasks.get(taskToBeDeleted.status);
-        if (!tasks) return;
+        const tasks = this.groupedTasks.get(taskToBeDeleted.status) || [];
         const index = tasks.findIndex((task) => task.id === taskToBeDeleted.id);
         tasks.splice(index, 1);
+
         this.groupedTasks.set(taskToBeDeleted.status, tasks.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
       });
@@ -65,11 +66,28 @@ export class TasksService {
     this.http
       .patch(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${updatedTask.id}.json`, updatedTask)
       .subscribe(() => {
-        const tasks = this.groupedTasks.get(updatedTask.status);
-        if (!tasks) return;
+        const tasks = this.groupedTasks.get(updatedTask.status) || [];
         const index = tasks.findIndex((task) => task.id === updatedTask.id);
         tasks[index] = updatedTask;
+
         this.groupedTasks.set(updatedTask.status, tasks.slice());
+        this.tasksGroupedByStatus$.next(this.groupedTasks);
+      });
+  }
+
+  moveTaskToAnotherStatus(movedTask: ITask, newStatus: TaskStatus) {
+    const taskWithNewStatus: ITask = { ...movedTask, status: newStatus };
+    this.http
+      .patch(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${movedTask.id}.json`, taskWithNewStatus)
+      .subscribe(() => {
+        const previousGroup = this.groupedTasks.get(movedTask.status) || [];
+        const nextGroup = this.groupedTasks.get(newStatus) || [];
+        const index = previousGroup.findIndex((task) => task.id === movedTask.id);
+
+        previousGroup.splice(index, 1);
+        nextGroup.push(taskWithNewStatus);
+
+        this.groupedTasks.set(newStatus, nextGroup.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);
       });
   }

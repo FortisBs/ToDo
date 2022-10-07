@@ -1,12 +1,34 @@
 <app-toolbar></app-toolbar>
 
-<div class="container">
-  <ng-container *ngIf="taskLists$ | async as taskLists">
-    <app-tasks-list *ngFor="let taskGroup of taskLists | keyvalue: disableSort"
-                    [taskStatus]="taskGroup.key"
-                    [filteredTasks]="taskGroup.value
+<div class="tasks-lists">
+  <ng-container *ngFor="let taskList of activeTasks | keyvalue: disableSort">
+    <app-tasks-list [taskStatus]="taskList.key"
+                    [filteredTasks]="taskList.value
                     | filter: toolbarData.searchValue
                     | sort: toolbarData.sortValue: toolbarData.ascDirection">
     </app-tasks-list>
   </ng-container>
+</div>
+
+<div class="commentsAndArchive">
+  <app-task-comments></app-task-comments>
+
+  <div class="archive">
+    <button (click)="archiveOpened = !archiveOpened">
+      {{ archiveOpened ? 'Hide' : 'Show' }} archived tasks
+    </button>
+
+    <ng-container *ngIf="archiveOpened">
+      <ng-container *ngIf="archivedTasks; else noArchivedTasks">
+        <app-tasks-list *ngFor="let archive of archivedTasks | keyvalue"
+                        [taskStatus]="archive.key"
+                        [filteredTasks]="archive.value">
+        </app-tasks-list>
+      </ng-container>
+
+      <ng-template #noArchivedTasks>
+        <p>There are no archived tasks on this board</p>
+      </ng-template>
+    </ng-container>
+  </div>
 </div>

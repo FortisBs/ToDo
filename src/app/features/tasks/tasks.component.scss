@@ -1,7 +1,32 @@
-.container {
+.tasks-lists {
   display: flex;
   justify-content: center;
   gap: 30px;
   padding: 0 30px 30px;
 }
 
+.commentsAndArchive {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  column-gap: 100px;
+  row-gap: 30px;
+}
+
+.archive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+button {
+  height: 30px;
+  padding: 0 15px;
+  border: 1px solid #D9D9D9;
+  cursor: pointer;
+
+  &:hover {
+    border: none;
+    outline: 2px solid black;
+  }
+}

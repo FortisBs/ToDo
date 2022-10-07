@@ -30,4 +30,8 @@ export class TaskComponent {
     event.stopPropagation();
     this.tasksService.deleteTask(this.task);
   }
+
+  moveToArchive() {
+    this.tasksService.moveTaskToAnotherStatus(this.task, 'Archived');
+  }
 }
