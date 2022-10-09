@@ -1,4 +1,5 @@
-<app-task-modal *ngIf="isModalOpened" [taskStatus]="taskStatus"
+<app-task-modal *ngIf="isModalOpened"
+                [taskStatus]="taskStatus"
                 (modalClosed)="isModalOpened = $event">
 </app-task-modal>
 
@@ -8,8 +9,12 @@
   </div>
 
   <div class="tasks">
-    <div class="tasks-add" *ngIf="taskStatus !== 'Archived'" (click)="openModal()">+</div>
+    <div class="tasks-add"
+         *ngIf="taskStatus !== 'Archived'"
+         (click)="openModal()">+</div>
 
-    <app-task *ngFor="let newTask of filteredTasks" [task]="newTask"></app-task>
+    <app-task *ngFor="let newTask of filteredTasks"
+              [task]="newTask">
+    </app-task>
   </div>
 </div>

@@ -85,7 +85,7 @@ export class TasksService {
         const index = previousGroup.findIndex((task) => task.id === movedTask.id);
 
         previousGroup.splice(index, 1);
-        nextGroup.push(taskWithNewStatus);
+        nextGroup.unshift(taskWithNewStatus);
 
         this.groupedTasks.set(newStatus, nextGroup.slice());
         this.tasksGroupedByStatus$.next(this.groupedTasks);

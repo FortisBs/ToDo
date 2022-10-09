@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from "@angular/router";
+
 import { AuthComponent } from './auth.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { LoginGuard } from "../../shared/guards/login.guard";
 
 @NgModule({
   declarations: [
@@ -11,7 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    RouterModule.forChild([{ path: '', component: AuthComponent, canActivate: [LoginGuard] }])
   ]
 })
 export class AuthModule { }

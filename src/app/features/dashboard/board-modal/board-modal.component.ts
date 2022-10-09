@@ -1,13 +1,23 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DashboardService } from "../dashboard.service";
 import { Board, IBoard } from "../../../shared/models/board.model";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-board-modal',
   templateUrl: './board-modal.component.html',
-  styleUrls: ['./board-modal.component.scss']
+  styleUrls: ['./board-modal.component.scss'],
+  animations: [
+    trigger('modalAppear', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(300)
+      ])
+    ])
+  ]
 })
 export class BoardModalComponent {
+  state = 'opened';
   @Input('item') board!: IBoard;
   @Input() editMode = false;
   @Output() modalClosed = new EventEmitter<boolean>();
@@ -15,6 +25,7 @@ export class BoardModalComponent {
   constructor(private dashboardService: DashboardService) {}
 
   closeModal() {
+    this.state = 'closed';
     this.editMode = false;
     this.modalClosed.emit(false);
   }

@@ -22,7 +22,9 @@
       <ng-container *ngIf="archivedTasks; else noArchivedTasks">
         <app-tasks-list *ngFor="let archive of archivedTasks | keyvalue"
                         [taskStatus]="archive.key"
-                        [filteredTasks]="archive.value">
+                        [filteredTasks]="archive.value
+                        | filter: toolbarData.searchValue
+                        | sort: toolbarData.sortValue: toolbarData.ascDirection">
         </app-tasks-list>
       </ng-container>
 

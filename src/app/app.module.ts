@@ -2,14 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AuthModule } from "./features/auth/auth.module";
-import { DashboardModule } from "./features/dashboard/dashboard.module";
-import { TasksModule } from "./features/tasks/tasks.module";
-import { HomeModule } from "./features/home/home.module";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptor } from "./features/auth/auth.interceptor";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,11 +15,9 @@ import { AuthInterceptor } from "./features/auth/auth.interceptor";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
-    DashboardModule,
-    TasksModule,
-    HomeModule
+    HttpClientModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

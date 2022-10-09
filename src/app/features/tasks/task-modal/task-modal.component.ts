@@ -2,11 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITask, Task, TaskFormData, TaskStatus } from "../../../shared/models/task.model";
 import { TasksService } from "../tasks.service";
 import { ActivatedRoute } from "@angular/router";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-task-modal',
   templateUrl: './task-modal.component.html',
-  styleUrls: ['./task-modal.component.scss']
+  styleUrls: ['./task-modal.component.scss'],
+  animations: [
+    trigger('modalAppear', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(300)
+      ])
+    ])
+  ]
 })
 export class TaskModalComponent implements OnInit {
   boardId!: string;

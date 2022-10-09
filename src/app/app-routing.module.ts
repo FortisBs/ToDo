@@ -1,23 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TasksComponent } from "./features/tasks/tasks.component";
-import { DashboardComponent } from "./features/dashboard/dashboard.component";
-import { AuthComponent } from "./features/auth/auth.component";
-import { AuthGuard } from "./shared/guards/auth.guard";
-import { LoginGuard } from "./shared/guards/login.guard";
-import { HomeComponent } from "./features/home/home.component";
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
-  { path: 'auth', component: AuthComponent, canActivate: [LoginGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard/:id', component: TasksComponent, canActivate: [AuthGuard] },
+  { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
+  { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'dashboard/:id', loadChildren: () => import('./features/tasks/tasks.module').then(m => m.TasksModule) },
   { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
