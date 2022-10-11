@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
-import { ToolbarModule } from "../../shared/components/toolbar/toolbar.module";
 import { RouterModule } from "@angular/router";
+import { ToolbarModule } from "../../shared/components/toolbar/toolbar.module";
+import { DragAndDropModule } from "../../shared/drag-and-drop/drag-and-drop.module";
 
 import { TasksComponent } from './tasks.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
@@ -24,8 +25,9 @@ import { AuthGuard } from "../../shared/guards/auth.guard";
     CommonModule,
     HttpClientModule,
     FormsModule,
+    RouterModule.forChild([{ path: '', component: TasksComponent, canActivate: [AuthGuard] }]),
     ToolbarModule,
-    RouterModule.forChild([{ path: '', component: TasksComponent, canActivate: [AuthGuard] }])
+    DragAndDropModule
   ]
 })
 export class TasksModule { }
