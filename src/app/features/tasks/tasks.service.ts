@@ -9,6 +9,7 @@ import { Subject } from "rxjs";
 export class TasksService {
   tasksGroupedByStatus$ = new Subject<Map<TaskStatus, ITask[]>>();
   groupedTasks = new Map<TaskStatus, ITask[]>();
+  openedTaskComments = new Subject<ITask>();
 
   constructor(private http: HttpClient) {}
 

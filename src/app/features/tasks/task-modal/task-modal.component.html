@@ -12,8 +12,8 @@
 
     <div>
       <label for="complexity">Complexity:</label><br>
-      <input type="number" id="complexity" name="complexity"
-             [ngModel]="editMode ? taskToBeEdited.complexity : 1" min="1" max="10" required>
+      <input type="number" id="complexity" name="complexity" required
+             [ngModel]="editMode ? taskToBeEdited.complexity : 1" min="1" max="10">
     </div>
 
     <div class="buttons">

@@ -31,7 +31,13 @@ export class TaskComponent {
     this.tasksService.deleteTask(this.task);
   }
 
-  moveToArchive() {
+  moveToArchive(event: MouseEvent) {
+    event.stopPropagation();
     this.tasksService.moveTaskToAnotherStatus(this.task, 'Archived');
   }
+
+  openComments() {
+    this.tasksService.openedTaskComments.next(this.task);
+  }
+
 }

@@ -7,7 +7,8 @@ export interface ITask {
   complexity: number,
   status: TaskStatus,
   boardId: string,
-  createdAt: string
+  createdAt: string,
+  comments: IComment[]
 }
 
 export class Task implements ITask {
@@ -16,8 +17,19 @@ export class Task implements ITask {
     public complexity: number,
     public status: TaskStatus,
     public boardId: string,
-    public createdAt: string
+    public createdAt: string,
+    public comments: IComment[] = []
   ) {}
 }
 
 export type TaskFormData = { name: string, complexity: number };
+
+export interface IComment {
+  createdAt: string,
+  text: string
+}
+
+export interface OpenedComments {
+  taskName: string
+  comments: IComment[]
+}

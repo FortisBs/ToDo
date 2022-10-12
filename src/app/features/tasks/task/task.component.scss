@@ -1,10 +1,20 @@
 .task {
   position: relative;
-  padding: 15px;
+  padding: 20px 15px 15px;
   background-color: #b9b0b0;
 
   &:hover {
     outline: 2px solid black;
+  }
+
+  &::before {
+    content: '☰☰';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: -3px;
+    cursor: move;
   }
 
   &-name {
@@ -13,10 +23,21 @@
   }
 
   &-data {
-    display: flex;
-    justify-content: space-between;
+    &-row {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
+
+.comments {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 
 .options-btn {
   position: absolute;

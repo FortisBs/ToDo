@@ -5,9 +5,15 @@
 
 <div class="task">
   <h4 class="task-name">{{ task.name }}</h4>
+
   <div class="task-data">
     <p>Complexity: {{ task.complexity }}</p>
-    <p>{{ task.createdAt | date: 'HH:mm MMM d' }}</p>
+    <div class="task-data-row">
+      <p class="comments" (click)="openComments()">
+        Comments: {{ task.comments ? task.comments.length : 0 }}
+      </p>
+      <p>{{ task.createdAt | date: 'HH:mm MMM d' }}</p>
+    </div>
   </div>
 
   <div class="options-btn" (click)="toggleOptions($event)">
@@ -19,6 +25,6 @@
   <div class="options" *ngIf="optionsOpened">
     <p *ngIf="task.status !== 'Archived'" (click)="openEdit($event)">Edit</p>
     <p (click)="delete($event)">Delete</p>
-    <p *ngIf="task.status === 'Done'" (click)="moveToArchive()">Archive</p>
+    <p *ngIf="task.status === 'Done'" (click)="moveToArchive($event)">Archive</p>
   </div>
 </div>
