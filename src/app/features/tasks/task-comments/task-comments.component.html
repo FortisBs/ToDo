@@ -3,25 +3,32 @@
   <p *ngIf="!openedTask; else comments">Please select a task.</p>
 
   <ng-template #comments>
-    <h4>Task: {{ openedTask.name }}</h4>
+    <div class="comments-title">
+      <h4>Task: {{ openedTask.name }}</h4>
+      <button (click)="addCommentOpened = !addCommentOpened">New comment</button>
+    </div>
     <hr>
-    <button (click)="addCommentOpened = !addCommentOpened">New comment</button>
 
     <form *ngIf="addCommentOpened">
-      <hr>
       <label for="commentText">Add comment</label><br>
       <textarea name="commentText" id="commentText"
                 cols="30" rows="5" placeholder="Text here..."
-                [(ngModel)]="commentText">
+                [(ngModel)]="commentText"
+                [ngStyle]="{ border: isNewCommentValid ? '1px solid grey' : '1px solid red' }">
       </textarea><br>
       <button type="button" (click)="addNewComment()">Post</button>
       <button type="button" (click)=closeForm()>Cancel</button>
       <hr>
     </form>
 
-    <div *ngFor="let comment of openedTask.comments">
-      <p>{{ comment.text }}</p>
-      <p>{{ comment.createdAt | date }}</p>
+    <p *ngIf="!openedTask.comments.length">There are no comments for this task.</p>
+
+    <div class="comment" *ngFor="let comment of openedTask.comments">
+      <div class="comment-title">
+        <img src="assets/comment.png" alt="Comment" class="comment-icon">
+        <span class="comment-date">{{ comment.createdAt | date: 'HH:mm EEE dd.MM.y' }}</span>
+      </div>
+      <p class="comment-text">{{ comment.text }}</p>
     </div>
   </ng-template>
 </div>

@@ -3,7 +3,7 @@
                 (modalClosed)="editOpened = $event">
 </app-task-modal>
 
-<div class="task">
+<div class="task" appDroppable (dragStart)="selectTask()">
   <h4 class="task-name">{{ task.name }}</h4>
 
   <div class="task-data">
@@ -27,4 +27,20 @@
     <p (click)="delete($event)">Delete</p>
     <p *ngIf="task.status === 'Done'" (click)="moveToArchive($event)">Archive</p>
   </div>
+
+  <!-- Moving animation while dragging task -->
+  <div class="task" *appDraggableHelper>
+    <h4 class="task-name">{{ task.name }}</h4>
+
+    <div class="task-data">
+      <p>Complexity: {{ task.complexity }}</p>
+      <div class="task-data-row">
+        <p class="comments" (click)="openComments()">
+          Comments: {{ task.comments ? task.comments.length : 0 }}
+        </p>
+        <p>{{ task.createdAt | date: 'HH:mm MMM d' }}</p>
+      </div>
+    </div>
+  </div>
+
 </div>

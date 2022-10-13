@@ -13,8 +13,8 @@
          *ngIf="taskStatus !== 'Archived'"
          (click)="openModal()">+</div>
 
-    <app-task *ngFor="let task of filteredTasks" [task]="task"
-              appDraggable appDroppable (dragStart)="selectTask(task)">
+    <app-task *ngFor="let task of filteredTasks"
+              [task]="task">
     </app-task>
   </div>
 </div>

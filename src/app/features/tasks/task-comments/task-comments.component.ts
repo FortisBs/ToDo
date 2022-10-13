@@ -13,34 +13,39 @@ export class TaskCommentsComponent implements OnInit, OnDestroy {
   openedTask!: ITask;
   addCommentOpened = false;
   commentText!: string;
+  isNewCommentValid = true;
 
   constructor(private tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.subscription = this.tasksService.openedTaskComments.subscribe({
-      next: (task) => this.openedTask = task
+      next: (task) => {
+        if (!task.comments) {
+          task.comments = [];
+        }
+        this.openedTask = task;
+      }
     });
   }
 
   closeForm() {
     this.commentText = '';
+    this.isNewCommentValid = true;
     this.addCommentOpened = false;
   }
 
   addNewComment() {
-    if (!this.commentText) return;
+    if (!this.commentText) {
+      this.isNewCommentValid = false;
+      return;
+    }
 
     const newComment: IComment = {
       text: this.commentText,
       createdAt: new Date().toString()
     };
 
-    if (this.openedTask.comments) {
-      this.openedTask.comments.unshift(newComment);
-    } else {
-      this.openedTask.comments = [newComment];
-    }
-
+    this.openedTask.comments.unshift(newComment);
     this.tasksService.updateTask(this.openedTask);
     this.closeForm();
   }
@@ -48,7 +53,5 @@ export class TaskCommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-
 
 }

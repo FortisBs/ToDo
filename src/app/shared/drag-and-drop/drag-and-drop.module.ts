@@ -1,25 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from "@angular/cdk/overlay";
+
 import { DraggableDirective } from './draggable.directive';
 import { DroppableDirective } from './droppable.directive';
 import { DropzoneDirective } from './dropzone.directive';
-import { MovableDirective } from './movable.directive';
+import { DragAndDropService } from "./drag-and-drop.service";
+import { DraggableHelperDirective } from './draggable-helper.directive';
 
 @NgModule({
   declarations: [
     DraggableDirective,
     DroppableDirective,
     DropzoneDirective,
-    MovableDirective
+    DraggableHelperDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    OverlayModule
   ],
   exports: [
     DraggableDirective,
     DroppableDirective,
     DropzoneDirective,
-    MovableDirective
-  ]
+    DraggableHelperDirective
+  ],
+  providers: [DragAndDropService]
 })
-export class DragAndDropModule { }
+export class DragAndDropModule {}

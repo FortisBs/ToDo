@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Observable, Subject } from "rxjs";
-import { ITask } from "../models/task.model";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DragAndDropService {
-  droppableItem!: ITask;
   dragStart$: Observable<PointerEvent>;
   dragMove$: Observable<PointerEvent>;
   dragEnd$: Observable<PointerEvent>;
@@ -15,7 +11,7 @@ export class DragAndDropService {
   private dragMoveSubject = new Subject<PointerEvent>();
   private dragEndSubject = new Subject<PointerEvent>();
 
-  constructor() {
+  constructor(@SkipSelf() @Optional() private parent?: DragAndDropService) {
     this.dragStart$ = this.dragStartSubject.asObservable();
     this.dragMove$ = this.dragMoveSubject.asObservable();
     this.dragEnd$ = this.dragEndSubject.asObservable();
@@ -23,13 +19,25 @@ export class DragAndDropService {
 
   onDragStart(event: PointerEvent): void {
     this.dragStartSubject.next(event);
+
+    if (this.parent) {
+      this.parent.onDragStart(event);
+    }
   }
 
   onDragMove(event: PointerEvent): void {
     this.dragMoveSubject.next(event);
+
+    if (this.parent) {
+      this.parent.onDragMove(event);
+    }
   }
 
   onDragEnd(event: PointerEvent): void {
     this.dragEndSubject.next(event);
+
+    if (this.parent) {
+      this.parent.onDragEnd(event);
+    }
   }
 }

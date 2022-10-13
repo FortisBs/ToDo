@@ -40,4 +40,8 @@ export class TaskComponent {
     this.tasksService.openedTaskComments.next(this.task);
   }
 
+  selectTask() {
+    this.tasksService.droppableItem.next(this.task);
+  }
+
 }
