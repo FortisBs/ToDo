@@ -12,6 +12,7 @@ export class TaskComponent {
 
   optionsOpened = false;
   editOpened = false;
+  isDragging = false;
 
   constructor(private tasksService: TasksService) {}
 
@@ -44,4 +45,7 @@ export class TaskComponent {
     this.tasksService.droppableItem.next(this.task);
   }
 
+  onDragEnd() {
+    this.tasksService.droppableItem.next(null);
+  }
 }

@@ -23,12 +23,17 @@
 
     <p *ngIf="!openedTask.comments.length">There are no comments for this task.</p>
 
-    <div class="comment" *ngFor="let comment of openedTask.comments">
+    <div class="comment" *ngFor="let comment of openedTask.comments; let i = index">
       <div class="comment-title">
-        <img src="assets/comment.png" alt="Comment" class="comment-icon">
-        <span class="comment-date">{{ comment.createdAt | date: 'HH:mm EEE dd.MM.y' }}</span>
+        <div>
+          <img src="assets/comment.png" alt="Comment">
+          <span>{{ comment.createdAt | date: 'HH:mm EEE dd.MM.y' }}</span>
+        </div>
+        <div class="delete-icon" (click)="deleteComment(i)">
+          <img src="assets/close.png" alt="Close" title="Delete comment">
+        </div>
       </div>
-      <p class="comment-text">{{ comment.text }}</p>
+      <p>{{ comment.text }}</p>
     </div>
   </ng-template>
 </div>

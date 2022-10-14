@@ -33,6 +33,7 @@ form {
 textarea {
   margin: 15px 0;
   padding: 15px;
+  font-size: 16px;
 }
 
 button {
@@ -58,8 +59,27 @@ button {
 
   &-title {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
     margin-bottom: 15px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+}
+
+.delete-icon {
+  height: 32px;
+  width: 32px;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #D9D9D9;
   }
 }

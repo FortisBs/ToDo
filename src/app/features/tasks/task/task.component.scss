@@ -7,8 +7,7 @@
     outline: 2px solid black;
   }
 
-  &::before {
-    content: '☰☰';
+  &-draggable {
     position: absolute;
     top: 0;
     left: 50%;
@@ -67,7 +66,7 @@
 
 .options {
   position: absolute;
-  bottom: 69px;
+  bottom: 92px;
   right: 0;
   width: 100px;
   text-align: center;

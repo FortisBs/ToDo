@@ -14,7 +14,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
   subscription!: Subscription;
   isModalOpened = false;
-  draggingTask!: ITask;
+  draggingTask!: ITask | null;
 
   constructor(private tasksService: TasksService) {}
 
@@ -32,10 +32,17 @@ export class TasksListComponent implements OnInit, OnDestroy {
     this.isModalOpened = true;
   }
 
-  replaceTask() {
+  replaceTask(event: DragEvent) {
+    event.preventDefault();
+    if (this.taskStatus === 'Archived' || !this.draggingTask) return;
+
     if (this.draggingTask.status !== this.taskStatus) {
       this.tasksService.moveTaskToAnotherStatus(this.draggingTask, this.taskStatus);
     }
   }
 
+  allowDrop(event: DragEvent) {
+    if (this.taskStatus === 'Archived') return;
+    event.preventDefault();
+  }
 }

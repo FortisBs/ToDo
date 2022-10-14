@@ -8,7 +8,8 @@
     <h3>{{ taskStatus }}</h3>
   </div>
 
-  <div class="tasks dropzone" appDropzone (drop)="replaceTask()">
+  <div class="tasks" [class.dropzone]="taskStatus !== 'Archived' && draggingTask"
+       (drop)="replaceTask($event)" (dragover)="allowDrop($event)">
     <div class="tasks-add"
          *ngIf="taskStatus !== 'Archived'"
          (click)="openModal()">+</div>

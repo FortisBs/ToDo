@@ -28,6 +28,10 @@ export class TaskCommentsComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   closeForm() {
     this.commentText = '';
     this.isNewCommentValid = true;
@@ -50,8 +54,9 @@ export class TaskCommentsComponent implements OnInit, OnDestroy {
     this.closeForm();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  deleteComment(index: number) {
+    this.openedTask.comments.splice(index, 1);
+    this.tasksService.updateTask(this.openedTask);
   }
 
 }
