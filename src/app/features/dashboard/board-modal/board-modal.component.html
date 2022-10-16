@@ -3,7 +3,6 @@
 <div class="modal" @modalAppear>
   <h3>{{ editMode ? 'Edit board' : 'Add new board' }}</h3>
 
-  <!-- Template driven form -->
   <form (ngSubmit)="editMode ? onEdit(form.value) : onAdd(form.value)" #form=ngForm>
     <div>
       <label for="name">Board name:</label><br>

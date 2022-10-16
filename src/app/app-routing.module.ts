@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
   { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'dashboard/:id', loadChildren: () => import('./features/tasks/tasks.module').then(m => m.TasksModule) },
+  { path: 'manage', loadChildren: () => import('./features/manage/manage.module').then(m => m.ManageModule) },
   { path: '**', redirectTo: 'home' }
 ];
 

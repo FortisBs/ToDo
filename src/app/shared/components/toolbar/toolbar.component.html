@@ -21,14 +21,16 @@
       </select>
     </div>
 
-    <div class="sort-direction" *ngIf="data.ascDirection; else desc"
+    <div class="sort-direction" title="Sort direction"
+         *ngIf="data.ascDirection; else desc"
          (click)="changeSortDirection()">
       <span>Asc</span>
       <span class="sort-arrow">&#8593;</span>
     </div>
 
     <ng-template #desc>
-      <div class="sort-direction" (click)="changeSortDirection()">
+      <div class="sort-direction" title="Sort direction"
+           (click)="changeSortDirection()">
         <span>Desc</span>
         <span class="sort-arrow">&#8595;</span>
       </div>

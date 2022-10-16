@@ -2,7 +2,8 @@
   <h1>Task Manager</h1>
   <nav class="nav">
     <a class="nav-link" *ngIf="page !== 'home'" routerLink="/home">Home</a>
-    <a class="nav-link" *ngIf="page === 'home' && isAuthenticated" routerLink="/dashboard">Dashboard</a>
+    <a class="nav-link" *ngIf="isAuthenticated && page === 'home' || page === 'manage'" routerLink="/dashboard">Dashboard</a>
+    <a class="nav-link" *ngIf="isAuthenticated && page !== 'manage'" routerLink="/manage">Manage</a>
     <a class="nav-link" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
     <a class="nav-link" *ngIf="!isAuthenticated && page !== 'auth'" routerLink="/auth">Login</a>
   </nav>

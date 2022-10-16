@@ -32,6 +32,11 @@
   font-size: 16px;
   border: none;
   border-bottom: 1px solid #D9D9D9;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .sort-direction {

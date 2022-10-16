@@ -5,10 +5,9 @@
 
 <div class="task" [draggable]="isDragging"
      (dragstart)="selectTask()" (dragend)="onDragEnd()">
-  <div class="task-draggable"
+  <div class="task-draggable" title="Move task"
        *ngIf="task.status !== 'Archived'"
-       (mousedown)="isDragging = true"
-       (mouseup)="isDragging = false"
+       (mousedown)="isDragging = true" (mouseup)="isDragging = false"
   >☰☰</div>
 
   <h4 class="task-name">{{ task.name }}</h4>
@@ -23,7 +22,7 @@
     </div>
   </div>
 
-  <div class="options-btn" (click)="toggleOptions($event)">
+  <div class="options-btn" title="Options" (click)="toggleOptions($event)">
     <span class="dots"></span>
     <span class="dots"></span>
     <span class="dots"></span>

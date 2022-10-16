@@ -14,7 +14,7 @@ export class AuthComponent implements OnInit {
   isLoginMode = true;
   authForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, this.passwordValidation])
   });
   errorMessage = '';
 
@@ -31,24 +31,25 @@ export class AuthComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  onSubmit() {
-    if (this.authForm.invalid) return;
+  passwordValidation(control: FormControl) {
+    const value: string = control.value;
+    if (value.length < 6 || value.includes('admin')) {
+      return { 'wrongPassword': true };
+    }
+    return null;
+  }
 
+  onSubmit() {
     const email = this.authForm.value.email as string;
     const password = this.authForm.value.password as string;
-    let authObs: Observable<AuthResponseData>;
 
-    if (this.isLoginMode) {
-      authObs = this.authService.login(email, password);
-    } else {
-      authObs = this.authService.signUp(email, password);
-    }
+    const authObs: Observable<AuthResponseData> = (this.isLoginMode)
+      ? this.authService.login(email, password)
+      : this.authService.signUp(email, password);
 
     authObs.subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => this.errorMessage = err
     });
-
-    this.authForm.reset();
   }
 }

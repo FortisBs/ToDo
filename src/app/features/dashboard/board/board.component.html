@@ -4,12 +4,15 @@
                  (modalClosed)="editOpened = $event">
 </app-board-modal>
 
-<div class="board" (click)="openBoard()" draggable="true">
+<div class="board" title="Open board" (click)="openBoard()">
   <h3>{{ board.name }}</h3>
   <p>{{ board.description }}</p>
-  <p>{{ board.createdAt | date: 'MMMM d, y' }}</p>
+  <div>
+    <p>Tasks: </p>
+    <p>{{ board.createdAt | date: 'MMMM d, y' }}</p>
+  </div>
 
-  <div class="options-btn" (click)="toggleOptions($event)">
+  <div class="options-btn" title="Options" (click)="toggleOptions($event)">
     <span class="dots"></span>
     <span class="dots"></span>
     <span class="dots"></span>
