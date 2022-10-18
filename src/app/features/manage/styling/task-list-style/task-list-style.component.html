@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="change-color">
+    <h3>Change background color</h3>
+
+    <div>
+      <p class="subtitle">Current color</p>
+      <div class="current-color"
+           [ngStyle]="{ background: currentColor }">
+      </div>
+    </div>
+
+    <div>
+      <p class="subtitle">Possible colors</p>
+      <div class="colored-boxes">
+        <ng-container *ngFor="let color of colors">
+          <div [ngStyle]="{ background: color }"
+               (click)="onSelectColor(color)"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h3 class="example-title">Example</h3>
+
+    <div class="example-tasks" [ngStyle]="{ background: currentColor }">
+      <div class="task" *ngFor="let exampleName of exampleTasks">
+        <p class="task-name">{{ exampleName }}</p>
+
+        <div class="task-data">
+          <p>-----------------</p>
+          <div class="task-data-row">
+            <p class="comments">-----------------</p>
+            <p>----------</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ITask, TaskStatus } from "../../../shared/models/task.model";
 import { TasksService } from "../tasks.service";
 import { Subscription } from "rxjs";
+import { ManageService } from "../../manage/manage.service";
 
 @Component({
   selector: 'app-tasks-list',
@@ -15,13 +16,19 @@ export class TasksListComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   isModalOpened = false;
   draggingTask!: ITask | null;
+  taskListColor!: string;
 
-  constructor(private tasksService: TasksService) {}
+  constructor(
+    private tasksService: TasksService,
+    private manageService: ManageService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.tasksService.droppableItem.subscribe({
       next: (task) => this.draggingTask = task
     });
+
+    this.taskListColor = this.manageService.getTaskListColor();
   }
 
   ngOnDestroy(): void {

@@ -8,10 +8,10 @@
 <div class="info">
   <div class="info-item">
     <p>Username: </p>
-    <input type="text">
+    <input type="text" name="username" [(ngModel)]="username">
   </div>
 
-  <button>Save username</button>
+  <button (click)="onSaveUsername()">Save username</button>
 </div>
 
 <div class="info">

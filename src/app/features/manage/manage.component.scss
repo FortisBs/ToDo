@@ -23,6 +23,7 @@ dd {
   cursor: pointer;
 
   & > a {
+    display: block;
     color: #D9D9D9;
     text-decoration: none;
   }
