@@ -1,5 +1,7 @@
 <header id="header">
   <h1>Task Manager</h1>
+  <span class="user" *ngIf="isAuthenticated">Hello, {{ identifyUser() }}</span>
+
   <nav class="nav">
     <a class="nav-link" *ngIf="page !== 'home'" routerLink="/home">Home</a>
     <a class="nav-link" *ngIf="isAuthenticated && page === 'home' || page === 'manage'" routerLink="/dashboard">Dashboard</a>

@@ -18,6 +18,6 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   onSaveUsername() {
-    this.manageService.saveUsername(this.username);
+    this.manageService.saveUsername(this.username.trim());
   }
 }

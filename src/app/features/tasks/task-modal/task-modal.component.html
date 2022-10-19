@@ -16,7 +16,7 @@
              [ngModel]="editMode ? taskToBeEdited.complexity : 1" min="1" max="10">
     </div>
 
-    <div class="buttons">
+    <div class="buttons-wrapper">
       <button type="button" (click)="closeModal()">Cancel</button>
       <button type="submit" [disabled]="form.invalid">{{ editMode ? 'Save' : 'Add' }}</button>
     </div>

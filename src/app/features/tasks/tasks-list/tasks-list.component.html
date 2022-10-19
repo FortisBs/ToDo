@@ -8,10 +8,8 @@
     <h3>{{ taskStatus }}</h3>
   </div>
 
-  <div class="tasks" [ngStyle]="{ background: taskListColor }"
-       [class.dropzone]="taskStatus !== 'Archived' && draggingTask"
-       (drop)="replaceTask($event)" (dragover)="allowDrop($event)">
-
+  <div class="tasks" appDroppable [taskStatus]="taskStatus"
+       [ngStyle]="{ background: taskListColor }">
     <div class="tasks-add" title="Add task"
          *ngIf="taskStatus !== 'Archived'"
          (click)="openModal()"

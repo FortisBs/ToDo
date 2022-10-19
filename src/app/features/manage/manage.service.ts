@@ -29,9 +29,8 @@ export class ManageService {
   }
 
   saveUsername(username: string) {
-    if (!username) return;
-
     const localData = localStorage.getItem('ToDoData');
+
     if (localData) {
       const data = JSON.parse(localData) as LocalData;
       data.username = username;

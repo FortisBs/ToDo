@@ -3,8 +3,8 @@
                 (modalClosed)="editOpened = $event">
 </app-task-modal>
 
-<div class="task" [draggable]="isDragging"
-     (dragstart)="selectTask()" (dragend)="onDragEnd()">
+<div class="task" appDraggable
+     [draggable]="isDragging" [draggableItem]="task">
   <div class="task-draggable" title="Move task"
        *ngIf="task.status !== 'Archived'"
        (mousedown)="isDragging = true" (mouseup)="isDragging = false"

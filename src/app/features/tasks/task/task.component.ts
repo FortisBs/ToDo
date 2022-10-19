@@ -40,12 +40,4 @@ export class TaskComponent {
   openComments() {
     this.tasksService.openedTaskComments.next(this.task);
   }
-
-  selectTask() {
-    this.tasksService.droppableItem.next(this.task);
-  }
-
-  onDragEnd() {
-    this.tasksService.droppableItem.next(null);
-  }
 }

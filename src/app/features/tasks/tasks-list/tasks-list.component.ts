@@ -1,7 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ITask, TaskStatus } from "../../../shared/models/task.model";
-import { TasksService } from "../tasks.service";
-import { Subscription } from "rxjs";
 import { ManageService } from "../../manage/manage.service";
 
 @Component({
@@ -9,47 +7,20 @@ import { ManageService } from "../../manage/manage.service";
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss']
 })
-export class TasksListComponent implements OnInit, OnDestroy {
+export class TasksListComponent implements OnInit {
   @Input() taskStatus!: TaskStatus;
   @Input() filteredTasks!: ITask[];
 
-  subscription!: Subscription;
   isModalOpened = false;
-  draggingTask!: ITask | null;
   taskListColor!: string;
 
-  constructor(
-    private tasksService: TasksService,
-    private manageService: ManageService
-  ) {}
+  constructor(private manageService: ManageService) {}
 
   ngOnInit(): void {
-    this.subscription = this.tasksService.droppableItem.subscribe({
-      next: (task) => this.draggingTask = task
-    });
-
     this.taskListColor = this.manageService.getTaskListColor();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   openModal() {
     this.isModalOpened = true;
-  }
-
-  replaceTask(event: DragEvent) {
-    event.preventDefault();
-    if (this.taskStatus === 'Archived' || !this.draggingTask) return;
-
-    if (this.draggingTask.status !== this.taskStatus) {
-      this.tasksService.moveTaskToAnotherStatus(this.draggingTask, this.taskStatus);
-    }
-  }
-
-  allowDrop(event: DragEvent) {
-    if (this.taskStatus === 'Archived') return;
-    event.preventDefault();
   }
 }

@@ -28,7 +28,7 @@ form {
   margin-top: 30px;
 }
 
-.buttons {
+.buttons-wrapper {
   align-self: end;
 }
 
@@ -59,26 +59,4 @@ input {
 .description {
   margin-top: 10px;
   font-style: italic;
-}
-
-button {
-  height: 30px;
-  width: 100px;
-  border: 1px solid #D9D9D9;
-  cursor: pointer;
-
-  &:first-of-type {
-    margin-right: 30px;
-  }
-
-  &:hover {
-    border: none;
-    outline: 2px solid black;
-  }
-
-  &:disabled {
-    border: 1px solid #D9D9D9;
-    outline: none;
-    cursor: initial;
-  }
 }
