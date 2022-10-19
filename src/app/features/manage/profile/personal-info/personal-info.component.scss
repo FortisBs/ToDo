@@ -1,6 +1,8 @@
+@import "src/variables";
+
 .info {
   max-width: 400px;
-  margin-bottom: 30px;
+  margin-bottom: $mediumIndent;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -9,7 +11,7 @@
   &-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: $smallIndent;
 
     &:last-of-type {
       margin-bottom: 0;
@@ -18,15 +20,15 @@
 }
 
 h3 {
-  margin-bottom: 15px;
+  margin-bottom: $smallIndent;
 }
 
 input {
-  height: 30px;
-  padding: 0 10px;
+  height: $mediumIndent;
+  padding: $inputPadding;
   font-size: 16px;
 }
 
 button {
-  margin-top: 15px;
+  margin-top: $smallIndent;
 }

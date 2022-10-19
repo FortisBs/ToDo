@@ -1,27 +1,29 @@
+@import "src/variables";
+
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: $mediumIndent;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: $mediumIndent;
 }
 
 .filter {
   height: 30px;
   width: 200px;
-  padding: 0 10px;
+  padding: $inputPadding;
   border: none;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid $primaryColor;
   font-size: 16px;
 
   &:focus {
     outline: none;
-    border-bottom: 2px solid black;
+    border-bottom: $outlineOnHover;
   }
 }
 
@@ -31,7 +33,7 @@
   width: 100px;
   font-size: 16px;
   border: none;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid $primaryColor;
   cursor: pointer;
 
   &:focus-visible {
@@ -40,7 +42,7 @@
 }
 
 .sort-direction {
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid $primaryColor;
   height: 30px;
   line-height: 30px;
   padding: 0 5px;

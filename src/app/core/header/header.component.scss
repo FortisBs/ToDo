@@ -1,11 +1,15 @@
+@import "src/variables";
+
+$headerLinkFontSize: 20px;
+
 #header {
   position: fixed;
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 30px;
-  padding: 15px 30px;
-  background-color: #D9D9D9;
+  gap: $mediumIndent;
+  padding: $smallIndent $mediumIndent;
+  background-color: $primaryColor;
   box-shadow: 0 -1px 10px;
   z-index: 100;
 }
@@ -19,8 +23,8 @@ h1 {
   flex: 1 0;
   justify-content: flex-end;
   align-items: center;
-  gap: 30px;
-  font-size: 20px;
+  gap: $mediumIndent;
+  font-size: $headerLinkFontSize;
 
   &-link {
     color: black;
@@ -35,5 +39,5 @@ h1 {
 
 .user {
   flex-shrink: 0;
-  font-size: 20px;
+  font-size: $headerLinkFontSize;
 }

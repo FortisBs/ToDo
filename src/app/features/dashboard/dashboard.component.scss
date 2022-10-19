@@ -1,14 +1,16 @@
+@import "src/variables";
+
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  padding: 0 30px 30px;
+  gap: $mediumIndent;
+  padding: 0 $mediumIndent $mediumIndent;
 }
 
 .add-board-wrapper {
   height: 200px;
   width: 200px;
-  padding: 25px 0;
+  padding: $mediumIndent 0;
 }
 
 .add-board {
@@ -18,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #D9D9D9;
+  background-color: $primaryColor;
   border-radius: 50px;
 
   &-plus {
@@ -26,7 +28,7 @@
   }
 
   &:hover {
-    outline: 2px solid black;
+    outline: $outlineOnHover;
     cursor: pointer;
   }
 }

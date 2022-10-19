@@ -1,9 +1,4 @@
-$smallIndent: 15px;
-$mediumIndent: 30px;
-$bigIndent: 100px;
-
-$primaryColor: #D9D9D9;
-$accentColor: grey;
+@import "variables";
 
 * {
   margin: 0;
@@ -18,7 +13,7 @@ body {
 }
 
 button {
-  padding: 6px 15px;
+  padding: 6px $smallIndent;
   font-size: 14px;
   border: 1px solid $accentColor;
   cursor: pointer;

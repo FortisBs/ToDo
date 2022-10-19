@@ -1,20 +1,22 @@
+@import "src/variables";
+
 .container {
   width: 500px;
-  margin: 30px auto 0;
-  padding: 30px;
-  background-color: #D9D9D9;
+  margin: $mediumIndent auto 0;
+  padding: $mediumIndent;
+  background-color: $primaryColor;
 }
 
 h2 {
-  margin-bottom: 30px;
+  margin-bottom: $mediumIndent;
 }
 
 input {
   display: block;
-  height: 30px;
+  height: $mediumIndent;
   width: 100%;
-  margin: 10px 0 15px;
-  padding: 0 10px;
+  margin: $smallIndent 0 $mediumIndent;
+  padding: $inputPadding;
   font-size: 16px;
 
   &#password {
@@ -23,11 +25,11 @@ input {
 }
 
 .buttons-wrapper {
-  margin-top: 30px;
+  margin-top: $mediumIndent;
 }
 
 .error-message {
-  margin-bottom: 15px;
+  margin-bottom: $smallIndent;
   color: red;
   text-align: center;
 }

@@ -1,16 +1,18 @@
+@import "src/variables";
+
 .comments {
-  padding: 0 30px;
+  padding: 0 $mediumIndent;
 
   &-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: $smallIndent;
   }
 }
 
 h3 {
-  margin-bottom: 30px;
+  margin-bottom: $mediumIndent;
   text-align: center;
 }
 
@@ -19,26 +21,26 @@ h4 {
 }
 
 hr {
-  margin: 15px 0;
+  margin: $smallIndent 0;
 }
 
 form {
   text-align: center;
 
   button:first-of-type {
-    margin-right: 15px;
+    margin-right: $smallIndent;
   }
 }
 
 textarea {
-  margin: 15px 0;
-  padding: 15px;
+  margin: $smallIndent 0;
+  padding: $smallIndent;
   font-size: 16px;
 }
 
 .comment {
-  margin-bottom: 15px;
-  padding: 15px;
+  margin-bottom: $smallIndent;
+  padding: $smallIndent;
   border: 1px solid grey;
 
   &:last-of-type {
@@ -49,13 +51,13 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: $smallIndent;
+    margin-bottom: $smallIndent;
 
     & > div {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: $smallIndent;
     }
   }
 }
@@ -68,6 +70,6 @@ textarea {
   cursor: pointer;
 
   &:hover {
-    background-color: #D9D9D9;
+    background-color: $primaryColor;
   }
 }

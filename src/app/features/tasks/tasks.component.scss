@@ -1,20 +1,22 @@
+@import "src/variables";
+
 .tasks-lists {
   min-height: 200px;
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 0 30px 30px;
+  gap: $mediumIndent;
+  padding: 0 $mediumIndent $mediumIndent;
 }
 
 .commentsAndArchive {
   display: grid;
   grid-template: auto / 1fr 1fr;
-  gap: 30px;
+  gap: $mediumIndent;
 }
 
 .archive {
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 30px;
+  row-gap: $mediumIndent;
 }

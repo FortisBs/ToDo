@@ -1,10 +1,12 @@
+@import "src/variables";
+
 .task {
   position: relative;
-  padding: 20px 15px 15px;
-  background-color: #b9b0b0;
+  padding: 20px $smallIndent $smallIndent;
+  background-color: $taskColor;
 
   &:hover {
-    outline: 2px solid black;
+    outline: $outlineOnHover;
   }
 
   &-draggable {
@@ -18,7 +20,8 @@
 
   &-name {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: $smallIndent;
+    padding-right: $smallIndent;
   }
 
   &-data {
@@ -76,11 +79,11 @@
     height: 20px;
     line-height: 20px;
     color: white;
-    background-color: #858585;
+    background-color: $accentColor;
     cursor: pointer;
 
     &:hover {
-      background-color: #656565;
+      background-color: $darkColor;
     }
   }
 
@@ -91,7 +94,7 @@
     display: block;
     height: 0;
     width: 0;
-    border-top: 10px solid #858585;
+    border-top: 10px solid $accentColor;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
   }
