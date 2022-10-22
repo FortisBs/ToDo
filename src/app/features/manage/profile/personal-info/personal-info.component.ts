@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ManageService } from "../../manage.service";
 
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
-  styleUrls: ['./personal-info.component.scss']
+  styleUrls: ['./personal-info.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PersonalInfoComponent implements OnInit {
   email!: string;

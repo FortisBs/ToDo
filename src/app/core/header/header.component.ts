@@ -9,7 +9,7 @@ import { ManageService } from "../../features/manage/manage.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private subs!: Subscription;
+  private subs = new Subscription();
   isAuthenticated = false;
   page!: string;
   email!: string;
@@ -19,13 +19,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private manageService: ManageService
   ) {}
 
+  // pass to directive then add OnPush to this component
   ngOnInit(): void {
-    this.subs = this.authService.user.subscribe({
+    this.subs.add(this.authService.user.subscribe({
       next: (user) => {
         this.isAuthenticated = !!user;
         this.email = user?.email || '';
       }
-    });
+    }));
     this.subs.add(this.authService.currentPage.subscribe({
       next: (value) => this.page = value
     }));

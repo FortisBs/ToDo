@@ -1,22 +1,24 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToolbarService } from "./toolbar.service";
 import { ToolbarData } from "../../models/toolbar.model";
 import { ActivatedRoute } from "@angular/router";
 import { DashboardService } from "../../../features/dashboard/dashboard.service";
+import { map, Observable } from "rxjs";
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit {
   @ViewChild('selectInput', {static: false}) selectInput!: ElementRef;
 
-  boardName!: string;
+  boardName!: Observable<string>;
   tasksPage!: boolean;
   data: ToolbarData = {
     searchValue: '',
-    sortValue: (this.tasksPage) ? 'complexity' : 'createdAt',
+    sortValue: 'createdAt',
     ascDirection: false
   }
 
@@ -29,10 +31,11 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     const boardId: string | undefined = this.route.snapshot.params['id'];
     this.tasksPage = !!boardId;
+
     if (boardId) {
-      this.dashboardService.getBoard(boardId).subscribe({
-        next: (board) => this.boardName = board.name
-      });
+      this.boardName = this.dashboardService.getBoard(boardId).pipe(
+        map((board) => board.name)
+      );
     }
   }
 

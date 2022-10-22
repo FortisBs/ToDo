@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DashboardService } from "../dashboard.service";
 import { Board, IBoard } from "../../../shared/models/board.model";
 import { animate, style, transition, trigger } from "@angular/animations";
@@ -7,6 +7,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
   selector: 'app-board-modal',
   templateUrl: './board-modal.component.html',
   styleUrls: ['./board-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('modalAppear', [
       transition('void => *', [

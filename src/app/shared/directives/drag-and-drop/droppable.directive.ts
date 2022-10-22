@@ -12,8 +12,12 @@ export class DroppableDirective implements OnInit, OnDestroy {
 
   @Input() taskStatus!: TaskStatus;
 
-  @HostBinding('class.dropzone')
-  isDroppable = this.taskStatus !== 'Archived' && this.draggingTask;
+  @HostBinding('class.dropzone') get isDroppable() {
+    if (!this.draggingTask) return false;
+    if (this.taskStatus === 'Archived') return false;
+
+    return this.taskStatus !== this.draggingTask.status;
+  }
 
   @HostListener('dragover', ['$event']) allowDrop(event: DragEvent) {
     if (this.taskStatus === 'Archived') return;

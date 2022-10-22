@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IBoard } from "../../../shared/models/board.model";
 import { DashboardService } from "../dashboard.service";
 import { TasksService } from "../../tasks/tasks.service";
@@ -7,7 +7,8 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardComponent {
   @Input('item') board!: IBoard;

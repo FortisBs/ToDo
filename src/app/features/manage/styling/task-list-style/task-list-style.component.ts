@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ManageService } from "../../manage.service";
 
 @Component({
   selector: 'app-task-list-style',
   templateUrl: './task-list-style.component.html',
-  styleUrls: ['./task-list-style.component.scss']
+  styleUrls: ['./task-list-style.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListStyleComponent implements OnInit {
   colors = ['#D9D9D9', 'darkslategray', 'darkgreen', 'darkblue', 'darkmagenta', 'darkkhaki',

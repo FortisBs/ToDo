@@ -16,5 +16,5 @@ export class DraggableDirective {
     this.tasksService.droppableItem.next(null);
   }
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService) {}
 }

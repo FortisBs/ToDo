@@ -12,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit, OnDestroy {
-  private subscription!: Subscription;
+  private subscription = new Subscription();
   toolbarData: ToolbarData = {
     searchValue: '',
     sortValue: 'createdAt',
@@ -29,10 +29,11 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.tasksService.tasksGroupedByStatus$.subscribe({
+    this.subscription.add(this.tasksService.tasksGroupedByStatus$.subscribe({
       next: (map) => this.splitArchivedTasks(map)
-    });
+    }));
     this.tasksService.initTasks(this.route.snapshot.params['id']);
+
     this.subscription.add(this.toolbarService.getData().subscribe({
       next: (data) => this.toolbarData = data
     }));
@@ -40,14 +41,15 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   private splitArchivedTasks(initialMap: Map<TaskStatus, ITask[]>) {
     initialMap.forEach((list, status) => {
-      if (status === 'Archived') {
-        if (list.length) {
-          this.archivedTasks?.set(status, list);
-        } else {
-          this.archivedTasks = null;
-        }
-      } else {
+      if (status !== 'Archived') {
         this.activeTasks.set(status, list);
+        return;
+      }
+
+      if (list.length) {
+        this.archivedTasks?.set(status, list);
+      } else {
+        this.archivedTasks = null;
       }
     });
   }

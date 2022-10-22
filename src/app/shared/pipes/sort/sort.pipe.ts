@@ -24,6 +24,6 @@ export class SortPipe implements PipeTransform {
       return 0;
     }
 
-    return initialArray.sort(compare);
+    return [...initialArray.sort(compare)];
   }
 }

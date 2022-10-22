@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITask, Task, TaskFormData, TaskStatus } from "../../../shared/models/task.model";
 import { TasksService } from "../tasks.service";
 import { ActivatedRoute } from "@angular/router";
@@ -8,6 +8,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
   selector: 'app-task-modal',
   templateUrl: './task-modal.component.html',
   styleUrls: ['./task-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('modalAppear', [
       transition('void => *', [

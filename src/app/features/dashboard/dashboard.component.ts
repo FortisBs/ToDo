@@ -12,7 +12,7 @@ import { AuthService } from "../auth/auth.service";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  subscription!: Subscription;
+  private subscription!: Subscription;
   boards$!: Observable<IBoard[]>;
   isModalOpened = false;
   toolbarData: ToolbarData = {
