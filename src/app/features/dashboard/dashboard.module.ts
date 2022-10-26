@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ToolbarModule } from "../../shared/components/toolbar/toolbar.module";
 import { RouterModule } from "@angular/router";
+import { LoadingSpinnerModule } from "../../shared/components/loading-spinner/loading-spinner.module";
 
 import { DashboardComponent } from './dashboard.component';
 import { BoardComponent } from './board/board.component';
@@ -20,8 +21,9 @@ import { AuthGuard } from "../../shared/guards/auth.guard";
     CommonModule,
     HttpClientModule,
     FormsModule,
+    RouterModule.forChild([{ path: '', component: DashboardComponent, canActivate: [AuthGuard] }]),
     ToolbarModule,
-    RouterModule.forChild([{ path: '', component: DashboardComponent, canActivate: [AuthGuard] }])
+    LoadingSpinnerModule
   ]
 })
 export class DashboardModule { }

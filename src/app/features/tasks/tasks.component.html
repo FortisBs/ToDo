@@ -1,6 +1,10 @@
 <app-toolbar></app-toolbar>
 
-<div class="tasks-lists">
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="tasks-lists" *ngIf="!isLoading">
   <ng-container *ngFor="let taskList of activeTasks | keyvalue: disableSort">
     <app-tasks-list [taskStatus]="taskList.key"
                     [filteredTasks]="taskList.value
@@ -10,7 +14,7 @@
   </ng-container>
 </div>
 
-<div class="commentsAndArchive">
+<div class="commentsAndArchive" *ngIf="!isLoading">
   <app-task-comments></app-task-comments>
 
   <div class="archive">
@@ -20,7 +24,7 @@
 
     <ng-container *ngIf="archiveOpened">
       <ng-container *ngIf="archivedTasks; else noArchivedTasks">
-        <app-tasks-list *ngFor="let archive of archivedTasks | keyvalue"
+        <app-tasks-list *ngFor="let archive of archivedTasks | keyvalue: disableSort"
                         [taskStatus]="archive.key"
                         [filteredTasks]="archive.value
                         | filter: toolbarData.searchValue

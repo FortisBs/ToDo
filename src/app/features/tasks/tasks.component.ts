@@ -21,6 +21,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   activeTasks = new Map<TaskStatus, ITask[]>();
   archivedTasks: Map<TaskStatus, ITask[]> | null = new Map<TaskStatus, ITask[]>();
   archiveOpened = false;
+  isLoading = false;
 
   constructor(
     private tasksService: TasksService,
@@ -29,8 +30,12 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.subscription.add(this.tasksService.tasksGroupedByStatus$.subscribe({
-      next: (map) => this.splitArchivedTasks(map)
+      next: (map) => {
+        this.splitArchivedTasks(map);
+        this.isLoading = false;
+      }
     }));
     this.tasksService.initTasks(this.route.snapshot.params['id']);
 
@@ -42,15 +47,13 @@ export class TasksComponent implements OnInit, OnDestroy {
   private splitArchivedTasks(initialMap: Map<TaskStatus, ITask[]>) {
     initialMap.forEach((list, status) => {
       if (status !== 'Archived') {
-        this.activeTasks.set(status, list);
+        this.activeTasks.set(status, list.slice());
         return;
       }
 
-      if (list.length) {
-        this.archivedTasks?.set(status, list);
-      } else {
-        this.archivedTasks = null;
-      }
+      this.archivedTasks = (list.length)
+        ? new Map<TaskStatus, ITask[]>([[status, list]])
+        : null;
     });
   }
 

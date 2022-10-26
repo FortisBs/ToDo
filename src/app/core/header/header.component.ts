@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private manageService: ManageService
   ) {}
 
-  // pass to directive then add OnPush to this component
   ngOnInit(): void {
     this.subs.add(this.authService.user.subscribe({
       next: (user) => {
@@ -44,4 +43,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const username = this.manageService.getUsername();
     return (username) ? username : this.email;
   }
+
 }

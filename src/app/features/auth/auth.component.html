@@ -1,6 +1,9 @@
-<div class="container">
-  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 
+<div class="container" *ngIf="!isLoading">
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
   <h2 class="title">{{ isLoginMode ? 'Login' : 'Registration' }}</h2>
 
   <form [formGroup]="authForm"
@@ -23,6 +26,5 @@
         Switch to {{ isLoginMode ? 'Registration' : 'Login' }}
       </button>
     </div>
-
   </form>
 </div>

@@ -79,6 +79,7 @@ export class TasksService {
 
   moveTaskToAnotherStatus(movedTask: ITask, newStatus: TaskStatus) {
     const taskWithNewStatus: ITask = { ...movedTask, status: newStatus };
+
     this.http
       .patch(`https://todo-565c1-default-rtdb.firebaseio.com/tasks/${movedTask.id}.json`, taskWithNewStatus)
       .subscribe(() => {

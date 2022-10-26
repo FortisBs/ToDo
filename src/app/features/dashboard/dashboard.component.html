@@ -1,10 +1,11 @@
 <app-toolbar></app-toolbar>
-<app-board-modal *ngIf="isModalOpened"
-                 (modalClosed)="isModalOpened = $event">
-</app-board-modal>
+
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 
 <div class="container">
-  <div class="add-board-wrapper">
+  <div class="add-board-wrapper" *ngIf="!isLoading">
     <div class="add-board" (click)="openModal()">
       <span class="add-board-plus">+</span>
       <span>New board</span>
@@ -19,3 +20,7 @@
     </app-board>
   </ng-container>
 </div>
+
+<app-board-modal *ngIf="isModalOpened"
+                 (modalClosed)="isModalOpened = $event">
+</app-board-modal>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "./auth.service";
 import { Observable } from "rxjs";
@@ -8,8 +8,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
   isLoginMode = true;
@@ -18,6 +17,7 @@ export class AuthComponent implements OnInit {
     password: new FormControl('', [Validators.required, this.passwordValidation])
   });
   errorMessage = '';
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -41,6 +41,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     const email = this.authForm.value.email as string;
     const password = this.authForm.value.password as string;
 
@@ -49,8 +50,14 @@ export class AuthComponent implements OnInit {
       : this.authService.signUp(email, password);
 
     authObs.subscribe({
-      next: () => this.router.navigate(['/dashboard']),
-      error: (err) => this.errorMessage = err
+      next: () => {
+        this.router.navigate(['/dashboard']);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err;
+      }
     });
   }
 }

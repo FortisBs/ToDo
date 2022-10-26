@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { ToolbarModule } from "../../shared/components/toolbar/toolbar.module";
 import { DragAndDropModule } from "../../shared/directives/drag-and-drop/drag-and-drop.module";
+import { LoadingSpinnerModule } from "../../shared/components/loading-spinner/loading-spinner.module";
 
 import { TasksComponent } from './tasks.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
@@ -27,7 +28,8 @@ import { AuthGuard } from "../../shared/guards/auth.guard";
     FormsModule,
     RouterModule.forChild([{ path: '', component: TasksComponent, canActivate: [AuthGuard] }]),
     ToolbarModule,
-    DragAndDropModule
+    DragAndDropModule,
+    LoadingSpinnerModule
   ]
 })
 export class TasksModule { }

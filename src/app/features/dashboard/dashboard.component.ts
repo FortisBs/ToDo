@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashboardService } from "./dashboard.service";
 import { IBoard } from "../../shared/models/board.model";
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subscription, tap } from "rxjs";
 import { ToolbarService } from "../../shared/components/toolbar/toolbar.service";
 import { ToolbarData } from "../../shared/models/toolbar.model";
 import { AuthService } from "../auth/auth.service";
@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     sortValue: 'createdAt',
     ascDirection: false
   };
+  isLoading = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -28,11 +29,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.boards$ = this.dashboardService.dashboardItems$;
-    this.dashboardService.initBoards();
+    this.isLoading = true;
     this.subscription = this.toolbarService.getData().subscribe({
       next: (data) => this.toolbarData = data
     });
+    this.boards$ = this.dashboardService.dashboardItems$.pipe(
+      tap(() => this.isLoading = false)
+    );
+    this.dashboardService.initBoards();
     this.authService.currentPage.next('dashboard');
   }
 
