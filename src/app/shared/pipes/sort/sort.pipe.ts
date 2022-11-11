@@ -5,11 +5,7 @@ import { SortValue } from "../../models/toolbar.model";
   name: 'sort'
 })
 export class SortPipe implements PipeTransform {
-  transform<T>(
-    initialArray: T[],
-    sortValue: SortValue,
-    isAscDirection: boolean
-  ): T[] {
+  transform<T>(initialArray: T[], sortValue: SortValue, isAscDirection: boolean): T[] {
     if (!initialArray.length) return [];
 
     const compare = (a: any, b: any) => {

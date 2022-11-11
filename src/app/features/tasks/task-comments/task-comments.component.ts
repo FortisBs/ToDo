@@ -58,5 +58,4 @@ export class TaskCommentsComponent implements OnInit, OnDestroy {
     this.openedTask.comments.splice(index, 1);
     this.tasksService.updateTask(this.openedTask);
   }
-
 }

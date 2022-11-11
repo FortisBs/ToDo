@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     sortValue: 'createdAt',
     ascDirection: false
   };
-  isLoading = false;
+  isLoading = true;
 
   constructor(
     private dashboardService: DashboardService,
@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
     this.subscription = this.toolbarService.getData().subscribe({
       next: (data) => this.toolbarData = data
     });

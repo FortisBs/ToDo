@@ -8,6 +8,8 @@ import { ITask } from "../../models/task.model";
 export class DraggableDirective {
   @Input() draggableItem!: ITask;
 
+  constructor(private tasksService: TasksService) {}
+
   @HostListener('dragstart') onDragStart() {
     this.tasksService.droppableItem.next(this.draggableItem);
   }
@@ -15,6 +17,4 @@ export class DraggableDirective {
   @HostListener('dragend') onDragEnd() {
     this.tasksService.droppableItem.next(null);
   }
-
-  constructor(private tasksService: TasksService) {}
 }

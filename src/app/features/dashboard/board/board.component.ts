@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IBoard } from "../../../shared/models/board.model";
 import { DashboardService } from "../dashboard.service";
-import { TasksService } from "../../tasks/tasks.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -17,7 +16,6 @@ export class BoardComponent {
 
   constructor(
     private dashboardService: DashboardService,
-    private tasksService: TasksService,
     private router: Router
   ) {}
 

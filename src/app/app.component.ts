@@ -7,8 +7,6 @@ import { AuthService } from "./features/auth/auth.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ToDo';
-
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {

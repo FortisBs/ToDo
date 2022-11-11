@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, Subject, tap, throwError } from "rxjs";
 import { AuthResponseData, LocalStorageUser } from "../../shared/models/auth.model";
 import { User } from "../../shared/models/user.model";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
 
   signUp(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBabEcff0o2NYWXMXlUSi70J5t0rViHL6c',
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
       { email, password, returnSecureToken: true }
     ).pipe(
       catchError(this.handleError),
@@ -29,7 +30,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBabEcff0o2NYWXMXlUSi70J5t0rViHL6c',
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
       { email, password, returnSecureToken: true }
     ).pipe(
       catchError(this.handleError),
@@ -60,7 +61,7 @@ export class AuthService {
       userData.id,
       userData._token,
       new Date(userData._tokenExpirationDate)
-    )
+    );
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
